@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    font-size: 12px;
+    background: #fff;
+    color: #222;
+    text-align: center;
+}
+
+.navbox {
+    width: 1920px;
+    height: 62px;
+    margin: 0 auto;
+}
+
+.nav {
+    width: 1200px;
+    height: 62px;
+    margin: 0 auto;
+}
+
+.nav img {
+    float: left;
+    margin-left: 130px;
+    margin-top: 5px
+}
+
+.nav a {
+    float: left;
+    line-height: 62px;
+    font-size: 22px;
+    color: #ff5b00;
+    margin-left: 180px;
+}
+
+.conbox {
+    width: 1920px;
+    height: 996px;
+    background-image: url(../tvapp/dsbg_zj.png);    
+}
+
+.con {
+    width: 1200px;
+    height: 990px;
+    margin: 0 auto;
+}
+
+.bignav h2 {
+    padding-top: 60px;
+    margin-bottom: 28px;
+    width: 1000px;
+    font-size: 40px;
+    color: #fff;
+    text-align: center;
+}
+
+.bignav p {
+    width: 1000px;
+    color: #cccccc;
+    font-size: 22px;
+    line-height: 26px;
+    letter-spacing: 4px;
+    text-align: center;
+}
+
+.bignav span {
+    color: #ff5b00;
+}
+
+.bignav img {
+    margin: 40px 0;
+}
+
+/* 轮播图 */
+.carouselbox {
+    position: relative;
+    width: 990px;
+    margin: 0 auto;
+    text-align: left;
+    overflow: hidden;
+    float: left;
+    margin-left: 60px;
+}
+
+.tn {
+    padding: 15px 0;
+    overflow: hidden;
+}
+
+.carousel {
+    position: relative;
+    float: left;
+    padding: 2px;
+    width: 783px;
+    height: 450px;
+    background: url(..//tvapp/ds.png) no-repeat;
+    background-size: 100%;
+}
+
+.slide img {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 720px;
+    height: 410px;
+    margin-left: 31px;
+    margin-top: 27px;
+}
+
+.next, .last {
+    position: absolute;
+    top: 200px;
+    width: 42px;
+    height: 90px;
+    overflow: hidden;
+}
+
+.last {
+    left: 30px;
+    background: url(../tvapp/right_zj.png);
+}
+
+.next {
+    right: 32px;
+    background: url(../tvapp/left_zj.png);
+}
+
+.joker {
+    width: 250px;
+    height: 300px;
+    float: right;
+    color: #fff;
+    margin-right: 75px;
+    margin-top: -300px;
+}
+
+.joker h3 {
+    font-size: 22px;
+    color: #ccc3c3;
+}
+
+.joker p {
+    font-size: 14px;
+    margin: 25px 0;
+}
+
+.middle {
+    width: 1920px;
+    height: 280px;
+    margin: 0px auto;
+    text-align: center;
+    background: #FFFFFF;
+}
+
+.middle h2 {
+    font-size: 22px;
+    margin: 38px 0px;
+}
+
+.footer {
+    width: 1920px;
+    background: #1f2227;
+    height: 100px;
+}
+
+.footer p {
+    text-align: center;
+    color: #565965;
+    font-size: 20px;
+    line-height: 80px;
+}

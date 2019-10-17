@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>今日影视TV版APP</title>
+    <!-- 引入css -->
+    <link rel="stylesheet" href="./css/tvapp.css">
+    <!-- 引入网站图标 -->
+    <link rel="icon" href="./tvapp/favicon.ico" type="image/x-icon"/>
+</head>
+
+<body>
+    <!-- 顶部 -->
+    <div class="navbox">
+        <div class="nav">
+            <img src="./tvapp/logo.png">
+            <a href>首页</a>
+        </div>
+    </div>
+
+    <!-- 简介内容 -->
+    <div class="conbox">
+        <div class="con">
+            <!-- 简介 -->
+            <div class="bignav">
+                <h2>今日影视TV版APP</h2>
+                <p>海量高清<span>视频</span>&nbsp;&nbsp;
+                    每日在线<span>更新</span>
+                </p>
+                <p>播放快速<span>流畅</span>&nbsp;&nbsp;
+                    点燃今日<span>激情</span>
+                </p>
+                <p>
+                    <a href="">
+                        <img src="./tvapp/apk.png" alt="">
+                    </a>
+                    <a href="">
+                        <img src="./tvapp/ios.png" alt="">
+                    </a>
+                    <a href="">
+                        <img src="./tvapp/ios-ipad.png" alt="">
+                    </a>
+                </p>
+            </div>
+
+            <!-- 轮播图 -->
+            <div class="carouselbox">
+                <div class="tn">
+                    <div class="carousel" id="carousel">
+                        <a href="" class="slide">
+                            <img src="./tvapp/slide_anime_zj.png" alt="">
+                        </a>
+                        <a href="" class="slide">
+                            <img src="./tvapp/slide_movie_zj.png" alt="">
+                        </a>
+                        <a href="" class="slide">
+                            <img src="./tvapp/slide_teleplay_zj.png" alt="">
+                        </a>
+                        <a href="" class="slide">
+                            <img src="./tvapp/slide_user_zj.png" alt="">
+                        </a>
+                        <a href="" class="last" title="上一个"></a>
+                        <a href="" class="next" title="下一个"></a>
+                    </div>
+                </div>
+            </div>
+            <!-- 宣传语 -->
+            <div class="joker">
+                <h3>好应用都会用</h3>
+                <p>一款个性化软件，老人小孩都会用.</p>
+                <h3>承诺：永久免费在线观看</h3>
+            </div>
+        </div>
+    </div>
+    <div class="middle">
+        <h2>今日影视是一款永久免费观看的视频软件，永不收费。</h2>
+        <h2>感谢您对今日影视提出建议或意见 - 反馈 QQ群：810593167</h2>
+        <a href="">
+            <img src="./tvapp/fk_zj.png" alt="">
+        </a>
+    </div>
+    <div class="footer">
+        <p> 湘ICP备16007023号-1 COPYRIGHT © 2013-2018 DABGBEI. ALL RIGHTS RESERVED</p>
+    </div>
+
+</body>
+<!-- 引入js文件 -->
+<script src="./js/jquery-1.4.2.min.js"></script>
+<script src="./js/carousel.js"></script>
+<script>
+    $(function () {
+
+        //带前后按钮
+        $('#carousel .slide img').soChange({
+            botPrev: '#carousel .last', //按钮，上一个
+            botNext: '#carousel .next' //按钮，下一个
+        });
+    });
+
+</script>
+
+</html>
