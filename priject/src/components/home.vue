@@ -208,11 +208,12 @@ export default {
       let alink = [];
       alink = document.querySelectorAll(".viewpage_type_area_left .li");
       let section = document.querySelectorAll(".Sudoku_ui li");
-
-      var i = 0;
-      setInterval(() => {
+      var i = 1;
+       alink[0].style.display = "block";
+        section[0].style.border = "1px solid #ff6600 ";
+     var dsq= setInterval(() => {
         if (i == 9) {
-             section[8].style.border = "1px solid #cfd0d1 ";
+            section[8].style.border = "1px solid #cfd0d1 ";
             alink[8].style.display = "none";
           i = 0;
         }
@@ -229,13 +230,17 @@ export default {
           section[8].style.border = "1px solid #cfd0d1 ";
           alink[8].style.display = "none";
         }
-       
-
       }, 2000);
+
+    //   for(var j= 0;j<section.length;j++){
+    //       section[i].onclick=function(){
+
+    //       }
+    //   }
     }
   },
-  created() {
-    this.circulation();
+  mounted(){
+  this.circulation();
   }
 };
 </script>

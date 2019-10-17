@@ -13,18 +13,19 @@
                   class="el-menu-demo"
                   mode="horizontal"
                   :unique-opened="true"
+                  :router="true"
                   background-color="black"
                   text-color="#fff"
                   active-text-color="#ffd04b"
                 >
-                  <el-menu-item index="1">首页</el-menu-item>
+                  <el-menu-item index="/home">首页</el-menu-item>
                   <el-submenu :index="item.path" v-for="item in menuList" :key="item.id">
                     <template slot="title">{{item.name}}</template>
                     <el-menu-item
-                      :index="item2.path"
-                      v-for="item2 in item.subObject"
-                      :key="item2.subObjectId"
-                    >{{item2.subName}}</el-menu-item>
+                      :index="item2.type_sort_path"
+                      v-for="item2 in item.sobObject"
+                      :key="item2.type_sort_id"
+                    >{{item2.type_sort_name}}</el-menu-item>
                   </el-submenu>
                 </el-menu>
                 <el-input
@@ -90,77 +91,25 @@ export default {
     return {
       //菜单数据 -假数据
       menuList: [
-        {
-          id: 1,
-          name: "连续剧",
-          path: "e21",
-          subObject: [
-            {
-              subObjectId: 5431,
-              subName: "战争片",
-              path: "13"
-            },
-            {
-              subObjectId: 43,
-              subName: "战争片",
-              path: "pathsd"
-            },
-            {
-              subObjectId: 54,
-              subName: "战争片",
-              path: "e1"
-            }
-          ]
-        },
-        {
-          id: 2,
-          name: "电影片",
-          path: "e22",
-          subObject: [
-            {
-              subObjectId: 41,
-              subName: "战争片",
-              path: "QDQW"
-            },
-            {
-              subObjectId: 312,
-              subName: "战争片",
-              path: "WQf"
-            },
-            {
-              subObjectId: 321,
-              subName: "战争片",
-              path: "qwdw"
-            }
-          ]
-        },
-        {
-          id: 3,
-          name: "连续剧",
-          path: "e23",
-          subObject: [
-            {
-              subObjectId: 113,
-              subName: "战争片",
-              path: "dsad"
-            },
-            {
-              subObjectId: 3321,
-              subName: "战争片",
-              path: "pathdqw"
-            },
-            {
-              subObjectId: 3213,
-              subName: "战争片",
-              path: "dwqd"
-            }
-          ]
-        }
+    
       ],
       // 搜索内容
       search: ""
     };
-  }
+  },
+  methods: {
+     async showGoodsData() {
+      const { data: res } = await this.$http.get("/cinema");
+      console.log(res.code);
+      if (res.code == 200) {
+        this.menuList = res.data.header.nav;
+      }
+    }
+
+  },
+  created() {
+   this.showGoodsData()
+  },
 };
 </script>
 <style>

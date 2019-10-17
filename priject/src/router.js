@@ -18,6 +18,10 @@ export default new Router({
         {
           path:'/home',
           component:()=> import('./components/home.vue'),
+        },
+        {
+          path:'/login',
+          component:()=> import('./components/Login.vue'),
         }
       ]
     }
