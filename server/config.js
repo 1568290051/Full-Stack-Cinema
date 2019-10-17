@@ -1,6 +1,6 @@
 module.exports = {
   server: {
-    port: 3007,
+    port: 8989,
     ip: '0.0.0.0'
   },
   db: {
