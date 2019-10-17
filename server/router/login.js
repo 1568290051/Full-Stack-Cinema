@@ -10,30 +10,35 @@ const db = require('../db')
 const apiName = 'cinema'
 
 // 创建路由 
-// const router = require('express').Router()
+const router = require('express').Router()
 
 // 创建需要令牌验证的路由  改成jwt.js中的路由
-const { router } = require('../jwt')
+// const { router } = require('../jwt')
 // 配置登录的路由
 router.post(`/${apiName}/login`, (req, res) => {
   let username = req.body.username
   let password = req.body.password
-  let param = [username,password]
+  // let param = [username, password]
   // 登录校验？
 
   // 使用用户名到数据库查询有账号
-  let sql = 'SELECT * FROM users WHERE username=? and password=?'
-  db.query(sql, param, (error, results, fields) => {
+  let sql = 'SELECT * FROM users WHERE username=?'
+  db.query(sql, username, (error, results, fields) => {
     // 如果账号存在
-    res.json(results[0])
-    if (results[0]) {
+    // res.json(results)
+    // res.json(results[0].password)
+    // res.json(password)
+    console.log(results);
+    if (results) {
       // 判断用户提交的密码和数据库中的密码是否一致
       if (md5(password + md5_key) == results[0].password) {
+      // md5(password + md5_key)
+      // if (password == results[0].password) {
         let token = jwt.sign({
           id: results[0].id,
           username: results[0].username
         }, md5_key, { expiresIn: '2h' })
-
+        // res.json('111')
         res.json({
           "code": 200,
           "token": token
@@ -51,6 +56,7 @@ router.post(`/${apiName}/login`, (req, res) => {
         "error": "该用户名不存在"
       })
     }
+
   })
 })
 

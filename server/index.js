@@ -12,6 +12,12 @@ const app = express()
 // 引入 body-parser
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
+var cors=require('cors');
+app.use(cors({
+    origin:['http://localhost:8080'],  //指定接收的地址
+    methods:['GET','POST'],  //指定接收的请求类型
+    alloweHeaders:['Content-Type','Authorization']  //指定header
+}))
 
 // 引入路由
 app.use('/api/v1', require('./router/login'))

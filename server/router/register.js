@@ -3,15 +3,19 @@ const db = require('../db')
 // md5加密
 const md5 = require('md5')
 const { md5_key } = require('../config')
+// 创建路由
+const router = require('express').Router()
 // 创建需要令牌验证的路由  改成jwt.js中的路由
-const { router } = require('../jwt')
+// const { router } = require('../jwt')
 // 接口名称
 const apiName = 'cinema'
 
 router.post(`/${apiName}/register`, (req, res) => {
   // 接口数据并验证
   let username = req.body.username || ''
-  let password = req.body.password || ''
+  let password = req.body.password || '123123'
+  let email = req.body.email || '123123132@qq.com'
+  let phone = req.body.phone || '123123123'
   // if (username.length < 2 || username.length > 8) {
   //   res.json({
   //     "code": 400,
@@ -30,7 +34,9 @@ router.post(`/${apiName}/register`, (req, res) => {
   let sql = 'INSERT INTO users SET ?'
   let data = {
     username,
-    password: md5(password + md5_key)
+    password: md5(password + md5_key),
+    email,
+    phone
   }
   db.query(sql, data, (error, results, fields) => {
     if (error) {
