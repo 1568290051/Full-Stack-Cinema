@@ -68,7 +68,7 @@
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-input placeholder="  输入常用手机号" v-model="input4">
+            <el-input placeholder=" 输入常用手机号" v-model="input4">
               <i slot="prefix" class="el-input__icon el-icon-mobile-phone"></i>
             </el-input>
           </el-form-item>
