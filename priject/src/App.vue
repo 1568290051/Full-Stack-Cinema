@@ -12,38 +12,48 @@
                 <el-menu
                   class="el-menu-demo"
                   mode="horizontal"
-                  unique-opened="true"
+                  :unique-opened="true"
+                  :router="true"
                   background-color="black"
                   text-color="#fff"
                   active-text-color="#ffd04b"
                 >
-                  <el-menu-item index="1">首页</el-menu-item>
+                  <el-menu-item index="/">首页</el-menu-item>
                   <el-submenu :index="item.path" v-for="item in menuList" :key="item.id">
                     <template slot="title">{{item.name}}</template>
                     <el-menu-item
-                      :index="item2.path"
-                      v-for="item2 in item.subObject"
-                      :key="item2.subObjectId"
-                    >{{item2.subName}}</el-menu-item>
+                      :index="item2.type_sort_path"
+                      v-for="item2 in item.sobObject"
+                      :key="item2.type_sort_id"
+                    >{{item2.type_sort_name}}</el-menu-item>
                   </el-submenu>
-                  
                 </el-menu>
-                 <el-input placeholder="输入关键字搜索"  v-model="search" style="width:156px;  position: fixed;
-  top: 12px;right:60px;" >
-                <i slot="prefix" class="el-input__icon el-icon-search"></i>
-              </el-input>
+                <el-input
+                  placeholder="输入关键字搜索"
+                  v-model="search"
+                  style="width:156px;  position: fixed;
+  top: 12px;right:194px;"
+                >
+                  <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                </el-input>
+                <!-- 登录路径 to='/....' -->
+             <router-link to=""  style="width:156px;  position: fixed;
+  top: 12px;right:21px;"> <el-button >登录</el-button></router-link>
+                <!-- 注册路径 to='/....' -->
+             <router-link to=""  style="width:156px;  position: fixed;
+  top: 12px;right:-55px;"> <el-button >注册</el-button></router-link>
               </div>
-         
-             
             </div>
-            
           </el-col>
         </el-row>
 
         <!-- 导航 end-->
       </el-header>
-      <!-- 中部 start -->  <!-- 去除两边空隙 -->
-      <el-main style="height: 60px;padding-left: 0px;padding-right: 0px;padding-bottom: 5px;border-top-width: 0px;padding: 0px">
+      <!-- 中部 start -->
+      <!-- 去除两边空隙 -->
+      <el-main
+        style="height: 60px;padding-left: 0px;padding-right: 0px;padding-bottom: 5px;border-top-width: 0px;padding: 0px"
+      >
         <router-view />
       </el-main>
       <!-- 中部 end -->
@@ -69,87 +79,33 @@
       <!-- 底部 end -->
     </el-container>
   </div>
+  
 </template>
 <script>
 export default {
   data() {
     return {
       //菜单数据 -假数据
-      menuList: [
-        {
-          id: 1,
-          name: "连续剧",
-          path: "e21",
-          subObject: [
-            {
-              subObjectId: 5431,
-              subName: "战争片",
-              path: "13"
-            },
-            {
-              subObjectId: 43,
-              subName: "战争片",
-              path: "pathsd"
-            },
-            {
-              subObjectId: 54,
-              subName: "战争片",
-              path: "e1"
-            }
-          ]
-        },
-        {
-          id: 2,
-          name: "电影片",
-          path: "e22",
-          subObject: [
-            {
-              subObjectId: 41,
-              subName: "战争片",
-              path: "QDQW"
-            },
-            {
-              subObjectId: 312,
-              subName: "战争片",
-              path: "WQf"
-            },
-            {
-              subObjectId: 321,
-              subName: "战争片",
-              path: "qwdw"
-            }
-          ]
-        },
-        {
-          id: 3,
-          name: "连续剧",
-          path: "e23",
-          subObject: [
-            {
-              subObjectId: 113,
-              subName: "战争片",
-              path: "dsad"
-            },
-            {
-              subObjectId: 3321,
-              subName: "战争片",
-              path: "pathdqw"
-            },
-            {
-              subObjectId: 3213,
-              subName: "战争片",
-              path: "dwqd"
-            }
-          ]
-        }
-      ],
+      menuList: [],
       // 搜索内容
       search: ""
     };
+  },
+  created() {
+    this.showGoodsData();
+  },
+  methods: {
+    // 显示数据
+    async showGoodsData() {
+      const { data: res } = await this.$http.get("/cinema");
+      console.log(res.data);
+      if (res.code == 200) {
+        this.menuList = res.data.header.nav;
+      }
+    }
   }
 };
 </script>
-
 <style>
 /* 初始化 */
 html,
@@ -210,5 +166,4 @@ body {
   text-align: center;
   line-height: 30px;
 }
-
 </style>
