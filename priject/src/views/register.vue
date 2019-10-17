@@ -6,7 +6,7 @@
       <div class="head">
         <div class="left_head">
           <a href>
-            <img src="../../public/img/logo.png" class="logo" />
+            <!-- <img src="../../public/img/logo.png" class="logo" /> -->
           </a>
           <h1 class="title">注册</h1>
         </div>
@@ -47,28 +47,28 @@
       </el-card>-->
       <el-card shadow="never">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="80px">
-          <el-form-item >
+          <el-form-item>
             <h1>欢迎注册京东云新账号</h1>
-            <hr>
+            <hr />
           </el-form-item>
           <el-form-item>
-            <el-input placeholder="输入账号名" v-model="ruleForm.name">
+            <el-input placeholder="输入账号名" v-model="ruleForm.username">
               <i slot="prefix" class="el-input__icon el-icon-user"></i>
             </el-input>
           </el-form-item>
 
           <el-form-item>
-            <el-input placeholder="输入密码" v-model="input4" show-password>
+            <el-input placeholder="输入密码" v-model="ruleForm.password" show-password>
               <i slot="prefix" class="el-input__icon el-icon-lock"></i>
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-input placeholder="再次输入密码" v-model="input4" show-password>
+            <el-input placeholder="输入邮箱" v-model="ruleForm.email" show-password>
               <i slot="prefix" class="el-input__icon el-icon-lock"></i>
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-input placeholder=" 输入常用手机号" v-model="input4">
+            <el-input placeholder=" 输入常用手机号" v-model="ruleForm.phone">
               <i slot="prefix" class="el-input__icon el-icon-mobile-phone"></i>
             </el-input>
           </el-form-item>
@@ -81,9 +81,36 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      ruleForm: {
+        username: "",
+        password: "",
+        email: "",
+        phone: ""
+      },
+      rules: {
+        username: [
+          { required: true, message: "请输入用户名", trigger: "blur" },
+          { min: 3, max: 5, message: "长度在 2 到 8 个字符", trigger: "blur" }
+        ],
+        password: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          { min: 3, max: 5, message: "长度在 6 到 18 个字符", trigger: "blur" }
+        ],
+        email: [
+          { required: true, message: "请输入邮箱", trigger: "blur" },
+          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        ],
+        phone: [
+          { required: true, message: "请输入手机号", trigger: "blur" },
+          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        ]
+      }
+    };
   },
-  methods: {}
+  methods: {
+    
+  }
 };
 </script>
 
@@ -197,16 +224,16 @@ a {
 .el-form {
   padding-top: 30px;
 }
-.el-input{
+.el-input {
   width: 350px;
   /* height: 40px; */
   margin-left: 365px;
 }
-h1{
+h1 {
   text-align: center;
   font-size: 30px;
   font-weight: 400;
-  padding:0px 10px;
+  padding: 0px 10px;
   margin-bottom: 18px;
 }
 </style>

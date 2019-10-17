@@ -37,7 +37,7 @@
                   <i slot="prefix" class="el-input__icon el-icon-search"></i>
                 </el-input>
 
-                <router-link to style="width:156px;  position: fixed;
+                <router-link to style="width:156px; position: fixed;
   top: 12px;right:21px;">
                   <el-button>登录</el-button>
                 </router-link>

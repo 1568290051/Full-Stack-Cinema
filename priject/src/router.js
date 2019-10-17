@@ -7,21 +7,21 @@ export default new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
+    // {
+    //   // 首页
+    //   path: "/",
+    //   name: "index",
+    //   component: () => import("./views/index.vue"),
+    //   redirect: "/home",
+    //   children: [
+    //     {
+    //       path: "/home",
+    //       component: () => import("./components/home.vue")
+    //     }
+    //   ]
+    // },
     {
-      // 首页
-      path: "/",
-      name: "index",
-      component: () => import("./views/index.vue"),
-      redirect: "/home",
-      children: [
-        {
-          path: "/home",
-          component: () => import("./components/home.vue")
-        }
-      ]
-    },
-    {
-      // 首页
+      // 注册
       path: "/register",
       name: "register",
       component: () => import("./views/register.vue")
