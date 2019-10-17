@@ -18,12 +18,12 @@ const router = require('express').Router()
 router.post(`/${apiName}/login`, (req, res) => {
   let username = req.body.username
   let password = req.body.password
-  let param = [username, password]
+  // let param = [username, password]
   // 登录校验？
 
   // 使用用户名到数据库查询有账号
   let sql = 'SELECT * FROM users WHERE username=?'
-  db.query(sql, param, (error, results, fields) => {
+  db.query(sql, username, (error, results, fields) => {
     // 如果账号存在
     // res.json(results)
     // res.json(results[0].password)
