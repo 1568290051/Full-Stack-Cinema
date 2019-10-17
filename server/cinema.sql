@@ -13,6 +13,10 @@
 
  Date: 16/10/2019 09:30:48
 */
+-- 创建数据库
+CREATE DATABASE priject;
+-- 进入数据库
+USE priject;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -129,8 +133,8 @@ INSERT INTO `type_sort` VALUES (21, '海外动画', 4, 'overseasAnimation');
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`  (
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户id',
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名',
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',

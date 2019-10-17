@@ -5,9 +5,10 @@ const md5 = require('md5')
 const { md5_key } = require('../config')
 // 创建需要令牌验证的路由  改成jwt.js中的路由
 const { router } = require('../jwt')
-
 // 接口名称
-router.post('接口', (req, res) => {
+const apiName = 'cinema'
+
+router.post(`/${apiName}/register`, (req, res) => {
   // 接口数据并验证
   let username = req.body.username || ''
   let password = req.body.password || ''
