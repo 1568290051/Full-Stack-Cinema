@@ -1,205 +1,226 @@
 <template>
-  <div>
-    <!-- 首页 -->
-    <div class="box_viewpage">
-      <!-- 版心 -->
-      <div class="viewpage_type_area )">
-        <ul class="viewpage_type_area_left all">
-          <li v-for="item in ulData" :key="item.video_id" >
-            <!-- 宣传照 -->
-            <img :src="item.cover_path" :title="item.video_name"  class="publicity" />
-            <div class="right-message">
-              <!-- 标题 -->
-              <div class="right-message-title">
-                <div>{{item.video_name}}</div>
-                <span style="color:#fe6500;font-size:12px;">HD</span>
-                <br />
-                <!-- 影片信息 -->
-                <div class="right-information">
-                  <span class="information_option" style="width:500px;">
-                    <label for>主演:</label>
-                    {{item.to_star}}
-                  </span>
-                  <br />
-                  <div class="information_option">
-                    <label for>类型:</label>
-                    {{item.typeSort_id}}
-                  </div>
-                  <div class="information_option">
-                    <label for>导演:</label>
-                    {{item.director}}
-                  </div>
-                  <div class="information_option">
-                    <label for>年份:</label>
-                    {{item.timeSort}}
-                  </div>
-                  <div class="information_option">
-                    <label for>时间:</label>
-                    {{item.datetime}}
-                  </div>
-                </div>
-               
+  <div id="app">
+    <el-container>
+      <!-- 头部 -->
+      <!-- 导航 start -->
+      <el-header style="height: 60px;padding-left: 0px;padding-right: 0px;">
+        <el-row>
+          <el-col :span="24">
+            <div class="nav">
+              <!-- 中心 -->
+              <div class="type_area">
+                <el-menu
+                  class="el-menu-demo"
+                  mode="horizontal"
+                  :unique-opened="true"
+                  background-color="black"
+                  text-color="#fff"
+                  active-text-color="#ffd04b"
+                >
+                  <el-menu-item index="1">首页</el-menu-item>
+                  <el-submenu :index="item.path" v-for="item in menuList" :key="item.id">
+                    <template slot="title">{{item.name}}</template>
+                    <el-menu-item
+                      :index="item2.path"
+                      v-for="item2 in item.subObject"
+                      :key="item2.subObjectId"
+                    >{{item2.subName}}</el-menu-item>
+                  </el-submenu>
+                </el-menu>
+                <el-input
+                  placeholder="输入关键字搜索"
+                  v-model="search"
+                  style="width:156px;  position: fixed;
+  top: 12px;right:200px;"
+                >
+                  <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                </el-input>
+
+                <router-link to style="width:156px;  position: fixed;
+  top: 12px;right:21px;">
+                  <el-button>登录</el-button>
+                </router-link>
+                <!-- 注册路径 to='/....' -->
+                <router-link to style="width:156px;  position: fixed;
+  top: 12px;right:-55px;">
+                  <el-button>注册</el-button>
+                </router-link>
               </div>
-              <span class="right-information" style="width:500px;">
-                <label for style="color: #999;">信息:</label>
-                {{item.plot}}
-              </span>
             </div>
-            
-          </li>
-            <div class="Sudoku">
+          </el-col>
+        </el-row>
+
+        <!-- 导航 end-->
+      </el-header>
+      <!-- 中部 start -->
+      <!-- 去除两边空隙 -->
+      <el-main
+        style="height: 60px;padding-left: 0px;padding-right: 0px;padding-bottom: 5px;border-top-width: 0px;padding: 0px"
+      >
+        <router-view></router-view>
+      </el-main>
+      <!-- 中部 end -->
+
+      <!-- 底部 start -->
+      <el-footer style="height: 60px;padding-left: 0px;padding-right: 0px;">
+        <!-- 去除两边空隙 -->
+        <el-row>
+          <el-col>
+            <!-- 底部 -->
+            <div class="Bottom">
+              <!-- 底部版心 -->
+              <div class="Bottom_type_area">
+                <div class="disclaimer">
+                  免责声明:本站所有视频均来自互联网收集而来，版权归原创者所有，如果侵犯了你的权益，请通知我们，我们会及时删除侵权内容，谢谢合作。流量统计站长统计
+                  <div>Copyright © 2019-2019 《免费电影_OK资源》</div>
                 </div>
-        </ul>
-       
-      </div>
-    </div>
+                <div class="copyright"></div>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+      </el-footer>
+      <!-- 底部 end -->
+    </el-container>
   </div>
 </template>
-
 <script>
 export default {
   data() {
     return {
-      // 假数据
-      ulData: [
+      //菜单数据 -假数据
+      menuList: [
         {
-          video_id: "1", //视频id
-          video_name: "中国机长e21e21e12e12e12e12e12e12e1", //视频名字
-          cover_path:
-            "https://rpg.pic-imges.com/pic/upload/vod/2019-10/201910131570938838.jpg",
-          video_path: "", //视频路径
-          to_star:
-            "王浩信,唐诗咏,陈敏之,张颕康,张曦雯,李天翔,冯盈盈,张文慈,李国麟,苗可", //主演
-          director: "王某", //导演
-          typeSort_id: "1",
-          timeSort: "2019", //年份
-          datetime: "2019-10-2", //上线时间
-          plot:
-            "哈哈哈哈哈哈啊哈哈哈安静哈哈哈哈哈哈啊哈哈哈安静哈哈哈哈哈哈啊哈哈哈安静哈哈哈哈哈哈啊哈哈哈安静哈哈哈哈哈哈啊哈哈哈安静哈哈哈哈哈哈啊哈哈哈安静" //剧情
+          id: 1,
+          name: "连续剧",
+          path: "e21",
+          subObject: [
+            {
+              subObjectId: 5431,
+              subName: "战争片",
+              path: "13"
+            },
+            {
+              subObjectId: 43,
+              subName: "战争片",
+              path: "pathsd"
+            },
+            {
+              subObjectId: 54,
+              subName: "战争片",
+              path: "e1"
+            }
+          ]
         },
-         {
-          video_id: "1", //视频id
-          video_name: "中国机长", //视频名字
-          cover_path:
-            "https://rpg.pic-imges.com/pic/upload/vod/2019-10/201910071570413217.jpg",
-          video_path: "", //视频路径
-          to_star:
-            "王浩信,唐诗咏,陈敏之,张颕康,张曦雯,李天翔,冯盈盈,张文慈,李国麟,苗可", //主演
-          director: "王某", //导演
-          typeSort_id: "1",
-          timeSort: "2019", //年份
-          datetime: "2019-10-2", //上线时间
-          plot:
-            "在熙攘的人类世界里，很多妖精隐匿其中，他们与人类相安无事地生活着。猫妖罗小黑因为家园被破坏，开始了它的流浪之旅。这场旅途中惺惺相惜的妖精同类与和谐包容的人类伙伴相继出现，让小黑陷入了两难抉择，究竟何处才是真正的归属？.." //剧情
+        {
+          id: 2,
+          name: "电影片",
+          path: "e22",
+          subObject: [
+            {
+              subObjectId: 41,
+              subName: "战争片",
+              path: "QDQW"
+            },
+            {
+              subObjectId: 312,
+              subName: "战争片",
+              path: "WQf"
+            },
+            {
+              subObjectId: 321,
+              subName: "战争片",
+              path: "qwdw"
+            }
+          ]
+        },
+        {
+          id: 3,
+          name: "连续剧",
+          path: "e23",
+          subObject: [
+            {
+              subObjectId: 113,
+              subName: "战争片",
+              path: "dsad"
+            },
+            {
+              subObjectId: 3321,
+              subName: "战争片",
+              path: "pathdqw"
+            },
+            {
+              subObjectId: 3213,
+              subName: "战争片",
+              path: "dwqd"
+            }
+          ]
         }
-      ]
-    }
-   
-  }, methods: {
-      // 自循环、
-      circulation(){
-        let all = document.querySelectorAll('.all li')
-        for(var i=0 ; i<all.length;i++){
-        console.log(all[i])
-        all[i].style.disolay='none'
-   
-        }
-        
-         
-      }
-    },created() {
-      this.circulation()
-    },
+      ],
+      // 搜索内容
+      search: ""
+    };
+  }
 };
-
-
-
 </script>
-<style >
-/* 轮播图 */
-.box_viewpage {
-  height: 350px;
-  background-color: #1c1c1c;
-  opacity: 0.9;
+<style>
+/* 初始化 */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
-/* 版心 */
-.viewpage_type_area {
-  overflow: hidden;
+#app {
+  width: 100%;
+  height: 100%;
+}
+.el-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* 导航样式 */
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  background-color: black;
+  z-index: 100;
+}
+.type_area {
   width: 1200px;
   height: 100%;
   margin: 0 auto;
-  background-color: #1c1c1c;
+  background-color: #f0f8ff;
 }
-ul {
-  list-style: none;
+/* 中间区域样式 */
+.el-main {
+  background-color: #f0f8ff;
 }
-/* 左边轮播图 */
-.viewpage_type_area_left {
-  position: relative;
-  width: 970px;
-  height: 310px;
-}
-.viewpage_type_area_left li {
-  position: absolute;
-  top: 0;
-  left: 0;
-  float: left;
-  /* display: inline-block; */
+/* 底部 */
+.Bottom {
+  background-color: #f0f8ff;
   width: 100%;
-  height: 310px;
+  height: 100px;
 }
-/* 宣传照 */
-.publicity {
-  float: left;
-  padding: 2px;
-  border: 2px solid #3b5261;
-  width: 228px;
-  height: 308px;
-}
-/* 信息 */
-.right-message {
-  padding: 0 10px;
-  float: left;
-  width: 716px;
-  height: 310px;
-  background-color: #1c1c1c;
-}
-/* 标题 */
-.right-message-title {
-  color: white;
-  font-weight: 400;
-  font-size: 26px;
-  font-family: "Microsoft Yahei";
-}
-/* 影片信息 */
-.right-information {
-  width: 500px;
+/* 底部版心 */
+.Bottom_type_area {
+  width: 1200px;
   height: 100%;
-  font-size: 14px;
-  color: #ccc;
+  margin: 0 auto;
+  background-color: #e9e8ef;
 }
-.information_option {
-  margin: 10px 0;
-  display: inline-block;
-  line-height: 24px;
-  width: 250px;
-}
-.information_option label {
-  font-size: 14px;
-  color: #999;
-}
-/* 右边九宫格 */
-.Sudoku{
-  position: absolute;
-  top: 44px;
-  right: -196px;
-/* top: 120px;
-right: 316px; */
-  width: 229px;
-  height: 228px;
-  background-color: black;
-}
-.reveal{
-  display: none;
+/* 免责声明 */
+.disclaimer {
+  padding: 20px 0;
+  color: #777777;
+  font-size: 12px;
+  border-top: 1px solid #555;
+  background: #e9e8ef;
+  text-align: center;
+  line-height: 30px;
 }
 </style>

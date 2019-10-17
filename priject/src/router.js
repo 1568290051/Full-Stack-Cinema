@@ -12,7 +12,14 @@ export default new Router({
       // 首页
       path: '/',
       name: 'index',
-      component:()=> import('./views/index.vue')
+      component:()=> import('./views/index.vue'),
+      redirect:'/home',
+      children:[
+        {
+          path:'/home',
+          component:()=> import('./components/home.vue'),
+        }
+      ]
     }
   ]
 })
