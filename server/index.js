@@ -14,7 +14,8 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // 引入路由
-
+app.use('/api/v1', require('./router/login'))
+app.use('/api/v1', require('./router/register'))
 
 // 连接跑起来~~~
 app.listen(

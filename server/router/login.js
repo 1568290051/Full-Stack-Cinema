@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken')
 // 引入数据库
 const db = require('../db')
 // 接口名称
+const apiName = 'cinema'
 
 // 创建路由 
 // const router = require('express').Router()
@@ -14,7 +15,7 @@ const db = require('../db')
 // 创建需要令牌验证的路由  改成jwt.js中的路由
 const { router } = require('../jwt')
 // 配置登录的路由
-router.post('接口', (req, res) => {
+router.post(`/${apiName}/login`, (req, res) => {
   let username = req.body.username
   let password = req.body.password
   let param = [username,password]
