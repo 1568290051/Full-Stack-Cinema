@@ -4,7 +4,7 @@
     <div class="box_viewpage">
       <!-- 版心 -->
       <div class="viewpage_type_area )">
-        <ul class="viewpage_type_area_left all" @mouseover="circulation">
+        <ul class="viewpage_type_area_left all" @click="circulation">
           <li v-for="(item,index) in ulData" :key="index" class="li reveal">
             <!-- 宣传照 -->
             <img :src="item.cover_path" :title="item.video_name" class="publicity" />
@@ -205,21 +205,33 @@ export default {
   methods: {
     // 自循环、
     circulation() {
-      let alink = document.querySelectorAll(".viewpage_type_area_left .li");
-      // let section = document.querySelectorAll(".Sudoku_ui li");
-      let index = 0;
-      var flag = true;
-      if (flag) {
-        setInterval(() => {
-          index++;
-          alink[index].style.display = "block";
-          alink[index - 1].style.display = "none";
-          if (index == 9) {
-            index = 0;
-          }
-        }, 1000);
-      
-      }
+      let alink = [];
+      alink = document.querySelectorAll(".viewpage_type_area_left .li");
+      let section = document.querySelectorAll(".Sudoku_ui li");
+
+      var i = 0;
+      setInterval(() => {
+        if (i == 9) {
+             section[8].style.border = "1px solid #cfd0d1 ";
+            alink[8].style.display = "none";
+          i = 0;
+        }
+        i++;
+        alink[i - 1].style.display = "block";
+        section[i - 1].style.border = "1px solid #ff6600 ";
+        alink[i - 2].style.display = "none";
+        section[i - 2].style.border = "1px solid #cfd0d1 ";
+        if (i == 8) {
+          section[9].style.border = "1px solid #ff6600 ";
+           alink[9].style.display = "block";
+        }
+        if (i == 0) {
+          section[8].style.border = "1px solid #cfd0d1 ";
+          alink[8].style.display = "none";
+        }
+       
+
+      }, 2000);
     }
   },
   created() {
@@ -332,7 +344,7 @@ right: 316px; */
 .Sudoku_ui img {
   width: 61px;
   height: 80px;
-  border: 1px solid #ffff;
+  /* border: 1px solid #ffff; */
 }
 .reveal {
   display: none;
