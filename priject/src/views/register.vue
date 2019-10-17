@@ -46,7 +46,7 @@
         </el-input>
       </el-card>-->
       <el-card shadow="never">
-        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="80px">
+        <el-form :model="ruleForm" :rules="rules" ref="regForm" label-width="80px">
           <el-form-item>
             <h1>欢迎注册京东云新账号</h1>
             <hr />
@@ -56,7 +56,6 @@
               <i slot="prefix" class="el-input__icon el-icon-user"></i>
             </el-input>
           </el-form-item>
-
           <el-form-item>
             <el-input placeholder="输入密码" v-model="ruleForm.password" show-password>
               <i slot="prefix" class="el-input__icon el-icon-lock"></i>
@@ -72,6 +71,12 @@
               <i slot="prefix" class="el-input__icon el-icon-mobile-phone"></i>
             </el-input>
           </el-form-item>
+          <el-row>
+            <el-col :offset="15">
+              <el-button type="primary" @click="register">注册</el-button>
+              <el-button type="info" @click="resetForm">重置</el-button>
+            </el-col>
+          </el-row>
         </el-form>
       </el-card>
     </div>
@@ -109,7 +114,28 @@ export default {
     };
   },
   methods: {
-    
+    // 点击重置表单项
+    resetForm() {
+      // 调用 resetFields 方法，重置表单
+      this.$refs.regForm.resetFields();
+    },
+    register() {
+      // 调用 validate 进行表单的预验证
+      this.$refs.regForm.validate(async valid => {
+        // 如果验证失败，直接return
+        if (!valid) return;
+        // 验证通过
+        const res = await this.$http.post("/cinema/register", this.ruleForm);
+        console.log(res.config.data);
+        // 提示登录失败！
+        if (res.data.code !== 200) return this.$message.error("添加用户失败");
+        this.$message.success("添加用户成功");
+        // 重置表单
+        this.$refs.regForm.resetFields();
+        // 路由跳转
+        this.$router = "/login";
+      });
+    }
   }
 };
 </script>
