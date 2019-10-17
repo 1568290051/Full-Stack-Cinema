@@ -42,7 +42,7 @@
                   <el-button>登录</el-button>
                 </router-link>
                 <!-- 注册路径 to='/....' -->
-                <router-link to style="width:156px;  position: fixed;
+                <router-link to='/register' style="width:156px;  position: fixed;
   top: 12px;right:-55px;">
                   <el-button>注册</el-button>
                 </router-link>
