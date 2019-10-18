@@ -113,7 +113,7 @@
 
 <script>
 // 引入公共vue实例
-import bus from "../eventBus";
+import bus from "./eventBus.js";
 
 export default {
   data() {

@@ -14,8 +14,8 @@ Vue.prototype.$http = Axios;
 Vue.config.productionTip = false;
 
 // 连接要互传值的组件
-import Details from "./components/details.vue"
-import ActionMovie from "./components/ActionMovie.vue"
+import Details from "./components/details.vue";
+import ActionMovie from "./components/ActionMovie.vue";
 // 把组件设为接收的标签
 Vue.component("text-details", Details);
 Vue.component("text-actionMovie", ActionMovie);
