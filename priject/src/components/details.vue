@@ -113,7 +113,7 @@
 
 <script>
 // 引入公共vue实例
-import bus from "../eventBus"
+import bus from "../eventBus";
 
 export default {
   data() {
@@ -243,15 +243,15 @@ export default {
   created() {
     // 获得从电影分类得到的电影ID
     bus.$on("send", data => {
-      this.idCont = data
-    })
+      this.idCont = data;
+    });
     // 获得电影详情页面数据
     this.getDetailsData();
   },
   methods: {
     async getDetailsData() {
-      console.log(this.idCont+ '----------')
-      // const res = await this.$http.get(`/cinema/details/${this.id}`);
+      console.log(this.idCont + "----------");
+      // const res = await this.$http.get(`/cinema/details/${this.idCont}`);
       // console.log(res);
     }
   }
