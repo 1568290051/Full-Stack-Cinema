@@ -21,6 +21,7 @@
       </div>
       <div class="sy-nav-down clearfix">
         <div class="sy clearfix" style="display: none;">
+          <!-- 分类 -->
           <dl class="clearfix">
             <dt>
               <span>按分类</span>
@@ -53,143 +54,28 @@
               <a href="#Record">记录片</a>
             </dd>
           </dl>
+          <!-- 年代 -->
           <dl class="clearfix">
             <dt>
               <span>按年代</span>
             </dt>
-            <dd @click="query($event)">
-              <a href="#" class="on">全部</a>
+            <dd @click="whole($event)">
+              <a href="javascript:;" class="on">全部</a>
             </dd>
-            <dd @click="query($event)">
-              <a href="#">2019</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2018</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2017</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2016</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2015</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2014</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2013</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2012</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2011</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2010</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2009</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2008</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2007</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2006</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2005</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2004</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2003</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2002</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2001</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2000</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">1999</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">1998</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">1997</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">1996</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">1995</a>
+            <dd @click="years($event, item.id)" v-for="(item, index) in time" :key="index">
+              <a href="javascript:;">{{item.year}}</a>
             </dd>
           </dl>
+          <!-- 地区 -->
           <dl class="clearfix">
             <dt>
               <span>按地区</span>
             </dt>
-            <dd @click="query($event)">
-              <a href="#" class="on">全部</a>
+            <dd @click="entire($event)">
+              <a href="javascript:;" class="on">全部</a>
             </dd>
-            <dd @click="query($event)">
-              <a href="#">大陆</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">香港</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">台湾</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">美国</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">韩国</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">日本</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">泰国</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">新加坡</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">马来西亚</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">印度</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">英国</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">法国</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">加拿大</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">西班牙</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">俄罗斯</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">其他</a>
+            <dd @click="region($event, item1.region_id)" v-for="(item1, index1) in area" :key="index1">
+              <a href="javascript:;">{{item1.region}}</a>
             </dd>
           </dl>
         </div>
@@ -217,14 +103,14 @@
     </div>
     <div class="index-area clearfix">
       <ul>
-        <li class="p1 m1" v-for="(item,index) in movieList" :key="index">
-          <router-link class="link-hover" :to="item.video_path" :title="item.video_name">
+        <li class="p1 m1" v-for="(item,index) in movieList" :key="index" @click="jump(item.video_id)">
+          <router-link class="link-hover" to="" :title="item.video_name">
             <img
               class="lazy"
               :src="item.cover_path"
               :alt="item.video_name"
               style="display: inline;"
-            >
+            >            
             <span class="video-bg"></span>
             <span class="lzbz">
               <p class="name">{{item.video_name}}</p>

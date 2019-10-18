@@ -13,7 +13,6 @@
       <el-main>
         <!-- 电影介绍 -->
         <el-row :gutter="20">
-          
           <!-- 电影海报 -->
           <el-col :span="6">
             <div class="grid-content bg-purple">
@@ -108,12 +107,14 @@
           </el-col>
         </el-row>
       </el-main>
-
     </el-container>
   </div>
 </template>
 
 <script>
+// 引入公共vue实例
+import bus from "../eventBus"
+
 export default {
   data() {
     return {
@@ -234,16 +235,23 @@ export default {
       ],
       // 播放列表
       activeName: "first",
+      // 接收id容器
+      idCont: [],
       id: 1
     };
   },
   created() {
-    this.getDetailsData()
+    // 获得从电影分类得到的电影ID
+    bus.$on("send", data => {
+      this.idCont = data
+    })
+    // 获得电影详情页面数据
+    this.getDetailsData();
   },
   methods: {
     async getDetailsData() {
-      const res = await this.$http.get(`/cinema/details/${this.id}`)
-      console.log(res)
+      const res = await this.$http.get(`/cinema/details/${this.id}`);
+      console.log(res);
     }
   }
 };
