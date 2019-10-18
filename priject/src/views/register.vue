@@ -12,7 +12,7 @@
         </div>
         <div class="right_head">
           <span>已有账号？</span>
-          <a href>去登录</a>
+          <a href class="login-button">去登录</a>
         </div>
         <div class="switch">
           <span class="option">中文</span>
@@ -122,16 +122,18 @@ export default {
         if (!valid) {
           return false;
         }
+        if (this.checked == true) {
+          const res = await this.$http.post("/cinema/register", this.ruleForm);
+          // console.log(res.config.data);
+          // 提示登录失败！
+          if (res.data.code !== 200) return this.$message.error("添加用户失败");
+          this.$message.success("添加用户成功");
+          // 重置表单
+          // this.$refs.regForm.resetFields();
+          // 路由跳转
+          this.$router.push = "/login";
+        }
         // 验证通过
-        const res = await this.$http.post("/cinema/register", this.ruleForm);
-        // console.log(res.config.data);
-        // 提示登录失败！
-        if (res.data.code !== 200) return this.$message.error("添加用户失败");
-        this.$message.success("添加用户成功");
-        // 重置表单
-        // this.$refs.regForm.resetFields();
-        // 路由跳转
-        this.$router.push = "/login";
       });
     }
   }
@@ -153,6 +155,9 @@ a {
   text-decoration: none;
 }
 
+.login-button {
+  margin-right: 91px;
+}
 .footer {
   width: 587px;
   height: 100px;
@@ -189,6 +194,17 @@ a {
   width: 1200px;
 }
 
+/* 验证提示 */
+.el-form-item__error {
+  color: #f56c6c;
+  font-size: 12px;
+  line-height: 1;
+  padding-top: 4px;
+  position: absolute;
+  top: 45px;
+  left: 370px;
+}
+
 .head {
   width: 100%;
   height: 60px;
@@ -207,8 +223,11 @@ a {
   font-size: 18px;
   font-weight: 400;
   line-height: 20px;
-  margin: 20px 0 0 20px;
   color: #333;
+  margin: 21px 0 0 83px;
+}
+.el-input__inner {
+  margin-bottom: 10px;
 }
 
 .right_head {
