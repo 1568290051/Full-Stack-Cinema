@@ -73,7 +73,7 @@ export default new Router({
     {
       // 注册
       path: "/register",
-      component: () => import("./views/register.vue")
+      component: () => import("./views/Register.vue")
     },
     {
       path: "/login",
