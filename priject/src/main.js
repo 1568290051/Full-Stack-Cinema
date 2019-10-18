@@ -17,9 +17,8 @@ Vue.config.productionTip = false;
 import Details from "./components/details.vue"
 import ActionMovie from "./components/ActionMovie.vue"
 // 把组件设为接收的标签
-Vue.component("text-details",Details)
-Vue.component("text-actionMovie",ActionMovie)
-
+Vue.component("text-details", Details);
+Vue.component("text-actionMovie", ActionMovie);
 
 new Vue({
   router,
