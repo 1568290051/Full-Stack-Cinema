@@ -42,8 +42,11 @@
                   <el-button>登录</el-button>
                 </router-link>
                 <!-- 注册路径 to='/....' -->
-                <router-link to='/register' style="width:156px;  position: fixed;
-  top: 12px;right:-55px;">
+                <router-link
+                  to="/register"
+                  style="width:156px;  position: fixed;
+  top: 12px;right:-55px;"
+                >
                   <el-button>注册</el-button>
                 </router-link>
               </div>
@@ -90,26 +93,23 @@ export default {
   data() {
     return {
       //菜单数据 -假数据
-      menuList: [
-    
-      ],
+      menuList: [],
       // 搜索内容
       search: ""
     };
   },
   methods: {
-     async showGoodsData() {
+    async showGoodsData() {
       const { data: res } = await this.$http.get("/cinema");
       console.log(res.code);
       if (res.code == 200) {
         this.menuList = res.data.header.nav;
       }
     }
-
   },
   created() {
-   this.showGoodsData()
-  },
+    this.showGoodsData();
+  }
 };
 </script>
 <style>

@@ -4,21 +4,23 @@
       <el-header>
         <!-- 面包屑导航 -->
         <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item :to="{ }">{{nav.select}}</el-breadcrumb-item>
           <el-breadcrumb-item>{{nav.item}}</el-breadcrumb-item>
         </el-breadcrumb>
       </el-header>
 
-      <el-main style="background: yellow">
+      <el-main>
         <!-- 电影介绍 -->
         <el-row :gutter="20">
+          
           <!-- 电影海报 -->
           <el-col :span="6">
             <div class="grid-content bg-purple">
               <img src="../assets/Movie_details/罗小黑.jpg" alt />
             </div>
           </el-col>
+
           <!-- 电影详情 -->
           <el-col :span="16">
             <div class="grid-content bg-purple">
@@ -68,7 +70,7 @@
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="播放列表" name="first">
             <el-tabs type="border-card">
-              <el-tab-pane label="OK播放①">OK播放①</el-tab-pane>
+              <el-tab-pane label="OK播放①" style="color: #f06000">OK播放①</el-tab-pane>
               <el-tab-pane label="OK播放②">OK播放②</el-tab-pane>
             </el-tabs>
             <el-divider></el-divider>
@@ -80,8 +82,15 @@
             <el-divider></el-divider>
             <el-button type="info" plain>HD中字</el-button>
           </el-tab-pane>
-          <el-tab-pane label="相关影片" name="second">相关影片介绍</el-tab-pane>
+          <el-tab-pane label="相关影片" name="second">
+            <el-tabs type="border-card">
+              <el-tab-pane label=" xunlei">需要安装迅雷下载工具</el-tab-pane>
+            </el-tabs>
+            <el-divider></el-divider>
+            <el-button type="info" plain>HD中字</el-button>
+          </el-tab-pane>
         </el-tabs>
+
         <!-- 猜喜欢 -->
         <h2>猜你喜欢</h2>
         <el-divider></el-divider>
@@ -100,7 +109,6 @@
         </el-row>
       </el-main>
 
-      <!-- <el-footer style="background: blue">Footer</el-footer> -->
     </el-container>
   </div>
 </template>
