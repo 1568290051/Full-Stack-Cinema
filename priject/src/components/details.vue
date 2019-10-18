@@ -250,8 +250,9 @@ export default {
   },
   methods: {
     async getDetailsData() {
-      const res = await this.$http.get(`/cinema/details/${this.id}`);
-      console.log(res);
+      console.log(this.idCont+ '----------')
+      // const res = await this.$http.get(`/cinema/details/${this.id}`);
+      // console.log(res);
     }
   }
 };

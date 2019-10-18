@@ -13,6 +13,14 @@ Axios.defaults.baseURL = "http://127.0.0.1:8989/api/v1";
 Vue.prototype.$http = Axios;
 Vue.config.productionTip = false;
 
+// 连接要互传值的组件
+import Details from "./components/Details.vue"
+import ActionMovie from "./components/ActionMovie.vue"
+// 把组件设为接收的标签
+Vue.component("text-details",Details)
+Vue.component("text-actionMovie",ActionMovie)
+
+
 new Vue({
   router,
   render: h => h(App)

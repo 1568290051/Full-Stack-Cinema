@@ -735,7 +735,8 @@ export default {
         return this.$message.error("跳转失败");
       }
       // 把得到的电影ID存到容器里
-      this.movieID = res.code
+      this.movieID = res.data.video[0].video_id
+      // console.log(this.movieID + '==========')
       // 把容器里的数据发送到电影详情组件里
       bus.$emit("send",this.movieID)
       // this.$router.push("/details");
