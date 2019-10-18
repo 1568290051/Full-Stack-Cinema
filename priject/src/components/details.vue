@@ -240,14 +240,19 @@ export default {
       id: 1
     };
   },
-  mounted() {
+  // mounted() {
+  //   // 获得从电影分类得到的电影ID
+  //   bus.$on("send", data => {
+  //     console.log(data + "----------");
+  //     this.idCont = data;
+  //   });
+  // },
+  created() {
     // 获得从电影分类得到的电影ID
     bus.$on("send", data => {
       console.log(data + "----------");
       this.idCont = data;
     });
-  },
-  created() {
     // 获得电影详情页面数据
     this.getDetailsData();
   },
