@@ -6,7 +6,7 @@
       <div class="head">
         <div class="left_head">
           <a href>
-            <img src="../../src/assets/movieLogo.png" class="logo" />
+            <!-- <img src="../../src/assets/movieLogo.png" class="logo" /> -->
           </a>
           <h1 class="title">注册</h1>
         </div>
@@ -22,9 +22,9 @@
       </div>
 
       <el-card shadow="never">
-        <el-form :model="ruleForm" :rules="rules" ref="regForm" label-width="80px">
+        <el-form :model="ruleForm" :rules="rules" ref="regFormRef" label-width="80px">
           <el-form-item>
-            <h1>欢迎注册京东云新账号</h1>
+            <h1>注册电影天堂新账号</h1>
             <hr />
           </el-form-item>
           <el-form-item prop="username">
@@ -62,6 +62,11 @@
           </el-row>
         </el-form>
       </el-card>
+
+      <div class="footer">
+        <span>Copyright©2012-2019 JDCloud.com 版权所有 京ICP备11041704号-31 京ICP证070359号</span>
+        <a href>隐私声明 &nbsp;&nbsp;&nbsp;资质证照</a>
+      </div>
     </div>
   </div>
 </template>
@@ -108,23 +113,25 @@ export default {
     // 点击重置表单项
     resetForm() {
       // 调用 resetFields 方法，重置表单
-      this.$refs.regForm.resetFields();
+      // this.$refs.regForm.resetFields();
     },
     register() {
       // 调用 validate 进行表单的预验证
-      this.$refs.regForm.validate(async valid => {
+      this.$refs.regFormRef.validate(async valid => {
         // 如果验证失败，直接return
-        if (!valid) return;
+        if (!valid) {
+          return false;
+        }
         // 验证通过
         const res = await this.$http.post("/cinema/register", this.ruleForm);
-        console.log(res.config.data);
+        // console.log(res.config.data);
         // 提示登录失败！
         if (res.data.code !== 200) return this.$message.error("添加用户失败");
         this.$message.success("添加用户成功");
         // 重置表单
-        this.$refs.regForm.resetFields();
+        // this.$refs.regForm.resetFields();
         // 路由跳转
-        this.$router = "/login";
+        this.$router.push = "/login";
       });
     }
   }
@@ -146,14 +153,40 @@ a {
   text-decoration: none;
 }
 
+.footer {
+  width: 587px;
+  height: 100px;
+  /* background-color: #67a; */
+  margin: 48px 324px;
+  margin: 48px 324px;
+}
+.footer span {
+  display: block;
+  font-size: 13px;
+}
+.footer a {
+  display: block;
+  width: 600px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  color: rgb(37, 37, 37);
+}
+/* .footer a:hover{
+  color: antiquewhite;
+} */
 .register {
   background-color: #fff;
   /* background-color: #f4f4f4; */
 }
 
 .container {
-  width: 1200px;
+  /* width: 1200px; */
   margin: auto;
+}
+
+.el-card__body {
+  width: 1200px;
 }
 
 .head {
@@ -211,7 +244,7 @@ a {
 
 .panel {
   margin: 0;
-  background: #fff;
+  /* background: rgb(49, 42, 42); */
 }
 
 .panel_head {
@@ -243,8 +276,7 @@ a {
 }
 .el-input {
   width: 350px;
-  /* height: 40px; */
-  margin-left: 365px;
+  margin-left: 370px;
 }
 h1 {
   text-align: center;
@@ -255,20 +287,19 @@ h1 {
 }
 
 .el-button--primary {
-  width: 350px;
+  width: 349px;
   background-color: #c0bbbb;
   font-size: 17px;
-  /* margin-right: 10px; */
-  margin-left: 11px;
+  margin-left: 3px;
 }
 .el-checkbox {
   margin-left: 375px;
 }
-.head{
+.head {
   margin-bottom: 30px;
   width: 100%;
 }
-.register{
+.register {
   background-color: #f4f4f4;
 }
 </style>

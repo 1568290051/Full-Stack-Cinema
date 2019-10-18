@@ -103,7 +103,7 @@ export default {
         if (!valid) return false;
         let { data: res } = await this.$http.post("login", this.loginForm);
 
-        if (res.meta.status = 400) {
+        if ((res.meta.status = 400)) {
           window.sessionStorage.removeItem("token");
           return this.$message.error(res.meta.msg);
         }
