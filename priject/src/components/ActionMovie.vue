@@ -255,6 +255,9 @@
 </template>
 
 <script>
+// 引入公共vue实例
+import bus from "../eventBus"
+
 export default {
   data() {
     return {
@@ -437,7 +440,9 @@ export default {
           region: "未知"
         }
       ],
-      area2_id: ''
+      area2_id: '',
+      // 传给电影详情的id数据容器
+      movieID: []
     };
   },
   created: function() {
@@ -720,7 +725,7 @@ export default {
         }
       }
     },
-    // 跳转
+    // 跳转到电影详情
     async jump(id) {
       console.log(id);
       const { data: res } = await this.$http.get(`/cinema/details/${id}`);
@@ -729,6 +734,10 @@ export default {
       if(res.code !== 200) {
         return this.$message.error("跳转失败");
       }
+      // 把得到的电影ID存到容器里
+      this.movieID = res.code
+      // 把容器里的数据发送到电影详情组件里
+      bus.$emit("send",this.movieID)
       // this.$router.push("/details");
     }
   }
