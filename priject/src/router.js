@@ -19,11 +19,13 @@ export default new Router({
           component: () => import("./components/home.vue")
         },
         {
-          path: '/login',
+          path: "/Movie",
+          component: () =>
+            import("./components/Movie_describe/Movie_MengMianGeWang.vue")
         },
         {
-          path: '/Movie',
-          component: () => import('./components/Movie_describe/Movie_MengMianGeWang.vue'),
+          path: "/details",
+          component: () => import("./components/details.vue")
         }
       ]
     },
@@ -32,6 +34,10 @@ export default new Router({
       path: "/register",
       name: "register",
       component: () => import("./views/register.vue")
+    },
+    {
+      path: "/login",
+      component: () => import("./views/Login.vue")
     }
   ]
 });
