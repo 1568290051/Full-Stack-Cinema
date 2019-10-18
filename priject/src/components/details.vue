@@ -248,18 +248,20 @@ export default {
   //   });
   // },
   created() {
-    // 获得从电影分类得到的电影ID
-    bus.$on("send", data => {
-      console.log(data + "----------");
-      this.idCont = data;
-    });
+    // // 获得从电影分类得到的电影ID
+    // bus.$on("send", data => {
+    //   console.log(data + "----------");
+    //   this.idCont = data;
+    // });
+    console.log(this.$route.params.id);
+    this.idCont = this.$route.params.id
     // 获得电影详情页面数据
     this.getDetailsData();
   },
   methods: {
     async getDetailsData() {
-      console.log(this.idCont + "=============");
-      const res = await this.$http.get(`/cinema/details/${this.id}`);
+      // console.log(this.idCont + "=============");
+      const res = await this.$http.get(`/cinema/details/${this.idCont}`);
       console.log(res);
     }
   }

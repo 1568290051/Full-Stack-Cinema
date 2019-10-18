@@ -113,7 +113,7 @@ export default {
     // 点击重置表单项
     resetForm() {
       // 调用 resetFields 方法，重置表单
-      // this.$refs.regForm.resetFields();
+      this.$refs.regForm.resetFields();
     },
     register() {
       // 调用 validate 进行表单的预验证
@@ -129,9 +129,9 @@ export default {
           if (res.data.code !== 200) return this.$message.error("添加用户失败");
           this.$message.success("添加用户成功");
           // 重置表单
-          // this.$refs.regForm.resetFields();
+          this.$refs.regForm.resetFields();
           // 路由跳转
-          this.$router.push = "/login";
+          this.$router.push("/login");
         }
         // 验证通过
       });
