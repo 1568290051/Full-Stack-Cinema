@@ -24,6 +24,7 @@ export default new Router({
             import("./components/Movie_describe/Movie_MengMianGeWang.vue")
         },
         {
+          // 电影详情路由
           path: "/details",
           component: () => import("./components/details.vue")
         }
