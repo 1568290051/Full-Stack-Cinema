@@ -17,6 +17,13 @@ export default new Router({
         {
           path: "/home",
           component: () => import("./components/home.vue")
+        },
+        {
+          path: '/login',
+        },
+        {
+          path: '/Movie',
+          component: () => import('./components/Movie_describe/Movie_MengMianGeWang.vue'),
         }
       ]
     },
