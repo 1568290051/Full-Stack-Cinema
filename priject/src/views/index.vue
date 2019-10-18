@@ -20,6 +20,7 @@
                 >
                   <el-menu-item index="/home">首页</el-menu-item>
                   <el-submenu :index="item.path" v-for="item in menuList" :key="item.id">
+                    {{item}}
                     <template slot="title">{{item.name}}</template>
                     <el-menu-item
                       :index="item2.type_sort_path"
@@ -101,10 +102,13 @@ export default {
   methods: {
     async showGoodsData() {
       const { data: res } = await this.$http.get("/cinema");
-      console.log(res.code);
+   console.log(res)
       if (res.code == 200) {
         this.menuList = res.data.header.nav[0];
+         console.log(this.menuList)
       }
+     
+      
     }
   },
   created() {
@@ -152,11 +156,11 @@ body {
 }
 /* 中间区域样式 */
 .el-main {
-  background-color: #f0f8ff;
+  background-color: #e9e8ef;
 }
 /* 底部 */
 .Bottom {
-  background-color: #f0f8ff;
+  background-color: #e9e8ef;
   width: 100%;
   height: 100px;
 }

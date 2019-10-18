@@ -77,7 +77,6 @@ html {
   background: #fff;
   font-weight: 800;
   cursor: pointer;
-  -webkit-border-radius: 10px;
   list-style: none;
   text-decoration: none;
 }
