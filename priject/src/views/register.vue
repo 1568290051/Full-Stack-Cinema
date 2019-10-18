@@ -162,8 +162,7 @@ a {
   width: 587px;
   height: 100px;
   /* background-color: #67a; */
-  margin: 48px 324px;
-  margin: 48px 324px;
+  margin: 48px auto;
 }
 .footer span {
   display: block;
@@ -192,6 +191,7 @@ a {
 
 .el-card__body {
   width: 1200px;
+  margin: 0 auto;
 }
 
 /* 验证提示 */
