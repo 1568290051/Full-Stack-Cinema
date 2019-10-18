@@ -233,7 +233,8 @@ export default {
         }
       ],
       // 播放列表
-      activeName: "first"
+      activeName: "first",
+      id: 1
     };
   },
   created() {
@@ -241,7 +242,7 @@ export default {
   },
   methods: {
     async getDetailsData() {
-      const res = await this.$http.get(`/cinema/details/${id}`)
+      const res = await this.$http.get(`/cinema/details/${this.id}`)
       console.log(res)
     }
   }
