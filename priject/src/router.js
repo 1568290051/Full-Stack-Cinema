@@ -26,11 +26,7 @@ export default new Router({
         {
           // 电影详情路由
           path: "/details",
-<<<<<<< Updated upstream
           component: () => import("./components/Details.vue")
-=======
-          component: () => import("./components/details.vue")
->>>>>>> Stashed changes
         },
         // 动作片
         {
