@@ -6,7 +6,7 @@
       <div class="head">
         <div class="left_head">
           <a href>
-            <!-- <img src="../../public/img/logo.png" class="logo" /> -->
+            <img src="../../src/assets/movieLogo.png" class="logo" />
           </a>
           <h1 class="title">注册</h1>
         </div>
@@ -20,31 +20,7 @@
           <span class="option">En</span>
         </div>
       </div>
-      <!-- 主体部分 -->
-      <!-- <div class="main">
-        <div class="container">
-          <div class="panel_head">
-            <h2>欢迎注册京东云新账号</h2>
-          </div>
-          <div class="panel_body">
-            <div class="form_main"></div>
-          </div>
-        </div>
-      </div>-->
-      <!-- <el-card shadow="never">
-        <el-input placeholder="输入账号名" v-model="input4">
-          <i slot="prefix" class="el-input__icon el-icon-user"></i>
-        </el-input>
-        <el-input placeholder="输入密码" v-model="input4" show-password>
-          <i slot="prefix" class="el-input__icon el-icon-lock"></i>
-        </el-input>
-        <el-input placeholder="再次输入密码" v-model="input4" show-password>
-          <i slot="prefix" class="el-input__icon el-icon-lock"></i>
-        </el-input>
-        <el-input placeholder="  输入常用手机号" v-model="input4">
-          <i slot="prefix" class="el-input__icon el-icon-mobile-phone"></i>
-        </el-input>
-      </el-card>-->
+
       <el-card shadow="never">
         <el-form :model="ruleForm" :rules="rules" ref="regForm" label-width="80px">
           <el-form-item>
@@ -71,10 +47,17 @@
               <i slot="prefix" class="el-input__icon el-icon-mobile-phone"></i>
             </el-input>
           </el-form-item>
+          <el-form-item>
+            <el-checkbox v-model="checked">
+              我已阅读并同意
+              <a href>隐私政策</a>
+              <a href>《电影天堂服务协议》</a>
+            </el-checkbox>
+          </el-form-item>
           <el-row>
-            <el-col :offset="11">
-              <el-button type="primary" @click="register">注册</el-button>
-              <el-button type="info" @click="resetForm">重置</el-button>
+            <el-col :offset="9">
+              <el-button type="primary" @click="register">同意协议并注册</el-button>
+              <!-- <el-button type="info" @click="resetForm">重置</el-button> -->
             </el-col>
           </el-row>
         </el-form>
@@ -93,9 +76,14 @@ export default {
         email: "",
         phone: ""
       },
+      checked: false,
       rules: {
         username: [
-          { required: true, message: "请输入用户名，不能为空", trigger: "blur" },
+          {
+            required: true,
+            message: "请输入用户名，不能为空",
+            trigger: "blur"
+          },
           { min: 2, max: 8, message: "长度在 2 到 8 个字符", trigger: "blur" }
         ],
         password: [
@@ -103,10 +91,14 @@ export default {
           { min: 6, max: 18, message: "长度在 6 到 18 个字符", trigger: "blur" }
         ],
         email: [
-          { required: true, message: "请输入邮箱，不能为空", trigger: "blur" },
+          { required: true, message: "请输入邮箱，不能为空", trigger: "blur" }
         ],
         phone: [
-          { required: true, message: "请输入手机号，不能为空", trigger: "blur" },
+          {
+            required: true,
+            message: "请输入手机号，不能为空",
+            trigger: "blur"
+          },
           { min: 11, max: 11, message: "长度在 11 个字符", trigger: "blur" }
         ]
       }
@@ -132,7 +124,7 @@ export default {
         // 重置表单
         this.$refs.regForm.resetFields();
         // 路由跳转
-        // this.$router = "/login";
+        this.$router = "/login";
       });
     }
   }
@@ -260,5 +252,23 @@ h1 {
   font-weight: 400;
   padding: 0px 10px;
   margin-bottom: 18px;
+}
+
+.el-button--primary {
+  width: 350px;
+  background-color: #c0bbbb;
+  font-size: 17px;
+  /* margin-right: 10px; */
+  margin-left: 11px;
+}
+.el-checkbox {
+  margin-left: 375px;
+}
+.head{
+  margin-bottom: 30px;
+  width: 100%;
+}
+.register{
+  background-color: #f4f4f4;
 }
 </style>
