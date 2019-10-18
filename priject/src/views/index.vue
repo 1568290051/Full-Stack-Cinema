@@ -157,7 +157,7 @@ body {
 }
 /* 底部版心 */
 .Bottom_type_area {
-  width: 1200px;
+  /* width: 1200px; */
   height: 100%;
   margin: 0 auto;
   background-color: #e9e8ef;
