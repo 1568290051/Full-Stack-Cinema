@@ -24,15 +24,11 @@ export default new Router({
             import("./components/Movie_describe/Movie_MengMianGeWang.vue")
         },
         {
-<<<<<<< Updated upstream
           // 电影详情路由
           path: "/details",
           component: () => import("./components/details.vue")
-=======
-          path:'/login',
-          component:()=> import('./components/Login.vue'),
         },
-        // 动作片        
+        // 动作片
         {
           path: "/ActionMovie",
           component: () => import("./components/ActionMovie.vue")
@@ -71,7 +67,6 @@ export default new Router({
         {
           path: "/Record",
           component: () => import("./components/Record.vue")
->>>>>>> Stashed changes
         }
       ]
     },
