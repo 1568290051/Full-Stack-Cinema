@@ -40,7 +40,7 @@
         <br />
         <span class="gray">
           类型：
-          <a href>dede</a>
+          <a href>日韩综</a>
         </span>
         <br />
         <span class="gray">
