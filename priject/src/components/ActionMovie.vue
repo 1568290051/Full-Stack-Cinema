@@ -256,7 +256,7 @@
 
 <script>
 // 引入公共vue实例
-import bus from "./eventBus.js"
+import bus from "../assets/eventBus.js"
 
 export default {
   data() {
