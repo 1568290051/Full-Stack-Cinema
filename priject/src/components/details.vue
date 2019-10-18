@@ -67,7 +67,7 @@
         </el-row>
 
         <!-- 电影集数 -->
-        <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tabs v-model="activeName">
           <el-tab-pane label="播放列表" name="first">
             <el-tabs type="border-card">
               <el-tab-pane label="OK播放①" style="color: #f06000">OK播放①</el-tab-pane>
@@ -145,6 +145,7 @@ export default {
         plot:
           "剧情简介:在熙攘的人类世界里，很多妖精隐匿其中，他们与人类相安无事地生活着。猫妖罗小黑因为家园被破坏，开始了它的流浪之旅。这场旅途中惺惺相惜的妖精同类与和谐包容的人类伙伴相继出现，让小黑陷入了两难抉择，究竟何处才是真正的归属？"
       },
+      detailsData: [],
       likeData: [
         {
           // 电影电视剧名称
@@ -235,9 +236,14 @@ export default {
       activeName: "first"
     };
   },
-  created() {},
+  created() {
+    this.getDetailsData()
+  },
   methods: {
-    handleClick() {}
+    async getDetailsData() {
+      const res = await this.$http.get(`/cinema/details/${id}`)
+      console.log(res)
+    }
   }
 };
 </script>

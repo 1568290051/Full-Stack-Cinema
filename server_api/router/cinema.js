@@ -44,11 +44,64 @@ let  data = {
      Recommend:{
          recommendHeader:[],
          recommendContent:[],
+         recommendRight:[]
      },
+     movie:[],
+     Sitcom:[],
+     Variety:[],
+     Comic:[]
+
  }}
 
 // 首页初始化查询
 router.get(`/${apiName}/`,(req,res)=>{
+    // 轮播图部分数据
+let carouselSql = "select * from video ORDER BY create_time desc limit 9"
+db.query(carouselSql,(error,results)=>{
+         if(error){
+             console.log(error)
+         }else{
+            let timeId = [];
+            let regionId  = [];
+            let typeId = [];
+            let videoId = [];
+            let languageId = [];
+            // for循环查询timeSort
+           
+            for(let index = 0;index<results.length;index++){
+                // console.log(results[0].timeSort_id)
+                timeId.push(results[index].timeSort_id)
+                regionId.push(results[index].regionSort_id)
+                typeId.push(results[index].typeSort_id)
+                videoId.push(results[index].videoSort_id)
+                languageId.push(results[index].language_id)
+                // console.log(languageId)
+                let record = [timeId[index],regionId[index],typeId[index],videoId[index],languageId[index]]
+                db.query('select(select time_sort_name from time_sort where time_sort_id =?)time_sort_name ,(select region_sort_name from region_sort where region_sort_id = ?)region_sort_name,(select type_sort_name from type_sort where type_sort_id = ?)type_sort_name,(select video_sort_name from video_sort where video_sort_id = ?)video_sort_name,(select language_name from video_language where language_id = ?)language_name'
+                ,record,(error,resultTime)=>{
+                        if(error){
+                            console.log(error,1)
+                        }else{
+                            // console.log(resultTime,results[0].videoSort_id)
+                         results[index].timeSort_id = resultTime[0].time_sort_name
+                         results[index].regionSort_id = resultTime[0].region_sort_name
+                         results[index].typeSort_id = resultTime[0].type_sort_name
+                         results[index].videoSort_id = resultTime[0].video_sort_name
+                         results[index].language_id = resultTime[0].language_name
+                        //  console.log(results[index].timeSort_id,1)
+                        }
+                        if(index>=results.length-1){
+                            for(let index = 0;index<results.length;index++){
+                                // data.header.Recommend.recommendHeader.push(results[index])
+                                data.header.carousel = results;
+                                // console.log(data.header.Recommend.recommendHeader)
+                            }
+                        }
+                })
+            }
+           
+         }
+})
 let navigationSql = 'select  video_sort_id,video_sort_name,video_sort_path from video_sort'
 // 推荐部分顶部五个随机推荐
 db.query('select * from video ORDER BY RAND() limit 5',(error,results)=>{
@@ -58,7 +111,7 @@ db.query('select * from video ORDER BY RAND() limit 5',(error,results)=>{
     let videoId = [];
     let languageId = [];
     // for循环查询timeSort
-    var flag = false;
+    
     for(let index = 0;index<results.length;index++){
         // console.log(results[0].timeSort_id)
         timeId.push(results[index].timeSort_id)
@@ -83,22 +136,19 @@ db.query('select * from video ORDER BY RAND() limit 5',(error,results)=>{
                 }
                 if(index>=results.length-1){
                     for(let index = 0;index<results.length;index++){
-                        data.header.Recommend.recommendHeader.push(results[index])
-                        console.log(data.header.Recommend.recommendHeader)
+                        data.header.Recommend.recommendHeader = results
+                        console.log( data.header.Recommend.recommendHeader)
+                        // console.log(data.header.Recommend.recommendHeader)
                     }
                 }
         })
     }
-    console.log(data.header.Recommend.recommendHeader)
-    // console.log(results) 
-    // console.log()
     // for(let index = 0;index<results.length;index++){
     //     data.header.Recommend.recommendHeader.push(results[index])
     // }
    
 })
-let recommendId = []
-// 推荐部分18个随机推荐电影
+// 推荐部分 18个随机推荐电影
 db.query('select * from video where  videoSort_id = 1  ORDER BY RAND() limit 18',(error,results)=>{
     let timeId = [];
     let regionId  = [];
@@ -106,7 +156,7 @@ db.query('select * from video where  videoSort_id = 1  ORDER BY RAND() limit 18'
     let videoId = [];
     let languageId = [];
     // for循环查询timeSort
-    var flag = false;
+   
     for(let index = 0;index<results.length;index++){
         // console.log(results[0].timeSort_id)
         timeId.push(results[index].timeSort_id)
@@ -121,7 +171,6 @@ db.query('select * from video where  videoSort_id = 1  ORDER BY RAND() limit 18'
                 if(error){
                     console.log(error,1)
                 }else{
-                    recommendId.push()
                     // console.log(resultTime,results[0].videoSort_id)
                  results[index].timeSort_id = resultTime[0].time_sort_name
                  results[index].regionSort_id = resultTime[0].region_sort_name
@@ -132,8 +181,8 @@ db.query('select * from video where  videoSort_id = 1  ORDER BY RAND() limit 18'
                 }
                 if(index>=results.length-1){
                     for(let index = 0;index<results.length;index++){
-                        data.header.Recommend.recommendContent.push(results[index])
-                        console.log(data.header.Recommend.recommendContent)
+                        data.header.Recommend.recommendContent = results
+                        // console.log(data.header.Recommend.recommendContent)
                     }
                 }
         })
@@ -146,7 +195,241 @@ db.query('select * from video where  videoSort_id = 1  ORDER BY RAND() limit 18'
     // }
    
 })
-
+// 随机推荐15个电视剧
+db.query('select * from video where  videoSort_id = 2  ORDER BY RAND() limit 15',(error,results)=>{
+    let timeId = [];
+    let regionId  = [];
+    let typeId = [];
+    let videoId = [];
+    let languageId = [];
+    // for循环查询timeSort
+  
+    for(let index = 0;index<results.length;index++){
+        // console.log(results[0].timeSort_id)
+        timeId.push(results[index].timeSort_id)
+        regionId.push(results[index].regionSort_id)
+        typeId.push(results[index].typeSort_id)
+        videoId.push(results[index].videoSort_id)
+        languageId.push(results[index].language_id)
+        // console.log(languageId)
+        let record = [timeId[index],regionId[index],typeId[index],videoId[index],languageId[index]]
+        db.query('select(select time_sort_name from time_sort where time_sort_id =?)time_sort_name ,(select region_sort_name from region_sort where region_sort_id = ?)region_sort_name,(select type_sort_name from type_sort where type_sort_id = ?)type_sort_name,(select video_sort_name from video_sort where video_sort_id = ?)video_sort_name,(select language_name from video_language where language_id = ?)language_name'
+        ,record,(error,resultTime)=>{
+                if(error){
+                    console.log(error,1)
+                }else{
+                    // console.log(resultTime,results[0].videoSort_id)
+                 results[index].timeSort_id = resultTime[0].time_sort_name
+                 results[index].regionSort_id = resultTime[0].region_sort_name
+                 results[index].typeSort_id = resultTime[0].type_sort_name
+                 results[index].videoSort_id = resultTime[0].video_sort_name
+                 results[index].language_id = resultTime[0].language_name
+                //  console.log(results[index].timeSort_id,1)
+                }
+                if(index>=results.length-1){
+                    for(let index = 0;index<results.length;index++){
+                        data.header.Recommend. recommendRight = results
+                        // console.log(data.header.Recommend.recommendContent)
+                    }
+                }
+        })
+    }
+    // console.log(data.header.Recommend.recommendHeader)
+    // console.log(results) 
+    // console.log()
+    // for(let index = 0;index<results.length;index++){
+    //     data.header.Recommend.recommendHeader.push(results[index])
+    // }
+   
+})
+// 最新的12部电影
+db.query('select * from video where  videoSort_id = 1  ORDER BY create_time desc limit 12',(error,results)=>{
+    let timeId = [];
+    let regionId  = [];
+    let typeId = [];
+    let videoId = [];
+    let languageId = [];
+    // for循环查询timeSort
+    
+    for(let index = 0;index<results.length;index++){
+        // console.log(results[0].timeSort_id)
+        timeId.push(results[index].timeSort_id)
+        regionId.push(results[index].regionSort_id)
+        typeId.push(results[index].typeSort_id)
+        videoId.push(results[index].videoSort_id)
+        languageId.push(results[index].language_id)
+        // console.log(languageId)
+        let record = [timeId[index],regionId[index],typeId[index],videoId[index],languageId[index]]
+        db.query('select(select time_sort_name from time_sort where time_sort_id =?)time_sort_name ,(select region_sort_name from region_sort where region_sort_id = ?)region_sort_name,(select type_sort_name from type_sort where type_sort_id = ?)type_sort_name,(select video_sort_name from video_sort where video_sort_id = ?)video_sort_name,(select language_name from video_language where language_id = ?)language_name'
+        ,record,(error,resultTime)=>{
+                if(error){
+                    console.log(error,1)
+                }else{
+                    // console.log(resultTime,results[0].videoSort_id)
+                 results[index].timeSort_id = resultTime[0].time_sort_name
+                 results[index].regionSort_id = resultTime[0].region_sort_name
+                 results[index].typeSort_id = resultTime[0].type_sort_name
+                 results[index].videoSort_id = resultTime[0].video_sort_name
+                 results[index].language_id = resultTime[0].language_name
+                //  console.log(results[index].timeSort_id,1)
+                }
+                if(index>=results.length-1){
+                    for(let index = 0;index<results.length;index++){
+                        data.header.movie.push(results[index])
+                        // console.log(data.header.Recommend.recommendContent)
+                    }
+                }
+        })
+    }
+    // console.log(data.header.Recommend.recommendHeader)
+    // console.log(results) 
+    // console.log()
+    // for(let index = 0;index<results.length;index++){
+    //     data.header.Recommend.recommendHeader.push(results[index])
+    // }
+   
+})
+// 最新的12部连续剧
+db.query('select * from video where  videoSort_id = 2  ORDER BY create_time desc limit 12',(error,results)=>{
+    let timeId = [];
+    let regionId  = [];
+    let typeId = [];
+    let videoId = [];
+    let languageId = [];
+    // for循环查询timeSort
+  
+    for(let index = 0;index<results.length;index++){
+        // console.log(results[0].timeSort_id)
+        timeId.push(results[index].timeSort_id)
+        regionId.push(results[index].regionSort_id)
+        typeId.push(results[index].typeSort_id)
+        videoId.push(results[index].videoSort_id)
+        languageId.push(results[index].language_id)
+        // console.log(languageId)
+        let record = [timeId[index],regionId[index],typeId[index],videoId[index],languageId[index]]
+        db.query('select(select time_sort_name from time_sort where time_sort_id =?)time_sort_name ,(select region_sort_name from region_sort where region_sort_id = ?)region_sort_name,(select type_sort_name from type_sort where type_sort_id = ?)type_sort_name,(select video_sort_name from video_sort where video_sort_id = ?)video_sort_name,(select language_name from video_language where language_id = ?)language_name'
+        ,record,(error,resultTime)=>{
+                if(error){
+                    console.log(error,1)
+                }else{
+                    // console.log(resultTime,results[0].videoSort_id)
+                 results[index].timeSort_id = resultTime[0].time_sort_name
+                 results[index].regionSort_id = resultTime[0].region_sort_name
+                 results[index].typeSort_id = resultTime[0].type_sort_name
+                 results[index].videoSort_id = resultTime[0].video_sort_name
+                 results[index].language_id = resultTime[0].language_name
+                //  console.log(results[index].timeSort_id,1)
+                }
+                if(index>=results.length-1){
+                    for(let index = 0;index<results.length;index++){
+                        data.header.Sitcom.push(results[index])
+                        // console.log(data.header.Recommend.recommendContent)
+                    }
+                }
+        })
+    }
+    // console.log(data.header.Recommend.recommendHeader)
+    // console.log(results) 
+    // console.log()
+    // for(let index = 0;index<results.length;index++){
+    //     data.header.Recommend.recommendHeader.push(results[index])
+    // }
+   
+})
+// 最新的12部综艺
+db.query('select * from video where  videoSort_id = 3  ORDER BY create_time desc limit 12',(error,results)=>{
+    let timeId = [];
+    let regionId  = [];
+    let typeId = [];
+    let videoId = [];
+    let languageId = [];
+    // for循环查询timeSort
+  
+    for(let index = 0;index<results.length;index++){
+        // console.log(results[0].timeSort_id)
+        timeId.push(results[index].timeSort_id)
+        regionId.push(results[index].regionSort_id)
+        typeId.push(results[index].typeSort_id)
+        videoId.push(results[index].videoSort_id)
+        languageId.push(results[index].language_id)
+        // console.log(languageId)
+        let record = [timeId[index],regionId[index],typeId[index],videoId[index],languageId[index]]
+        db.query('select(select time_sort_name from time_sort where time_sort_id =?)time_sort_name ,(select region_sort_name from region_sort where region_sort_id = ?)region_sort_name,(select type_sort_name from type_sort where type_sort_id = ?)type_sort_name,(select video_sort_name from video_sort where video_sort_id = ?)video_sort_name,(select language_name from video_language where language_id = ?)language_name'
+        ,record,(error,resultTime)=>{
+                if(error){
+                    console.log(error,1)
+                }else{
+                    // console.log(resultTime,results[0].videoSort_id)
+                 results[index].timeSort_id = resultTime[0].time_sort_name
+                 results[index].regionSort_id = resultTime[0].region_sort_name
+                 results[index].typeSort_id = resultTime[0].type_sort_name
+                 results[index].videoSort_id = resultTime[0].video_sort_name
+                 results[index].language_id = resultTime[0].language_name
+                //  console.log(results[index].timeSort_id,1)
+                }
+                if(index>=results.length-1){
+                    for(let index = 0;index<results.length;index++){
+                        data.header.Variety.push(results[index])
+                        // console.log(data.header.Recommend.recommendContent)
+                    }
+                }
+        })
+    }
+    // console.log(data.header.Recommend.recommendHeader)
+    // console.log(results) 
+    // console.log()
+    // for(let index = 0;index<results.length;index++){
+    //     data.header.Recommend.recommendHeader.push(results[index])
+    // }
+   
+})
+// 最新的12部动漫
+db.query('select * from video where  videoSort_id = 4  ORDER BY create_time desc limit 12',(error,results)=>{
+    let timeId = [];
+    let regionId  = [];
+    let typeId = [];
+    let videoId = [];
+    let languageId = [];
+    // for循环查询timeSort
+   
+    for(let index = 0;index<results.length;index++){
+        // console.log(results[0].timeSort_id)
+        timeId.push(results[index].timeSort_id)
+        regionId.push(results[index].regionSort_id)
+        typeId.push(results[index].typeSort_id)
+        videoId.push(results[index].videoSort_id)
+        languageId.push(results[index].language_id)
+        // console.log(languageId)
+        let record = [timeId[index],regionId[index],typeId[index],videoId[index],languageId[index]]
+        db.query('select(select time_sort_name from time_sort where time_sort_id =?)time_sort_name ,(select region_sort_name from region_sort where region_sort_id = ?)region_sort_name,(select type_sort_name from type_sort where type_sort_id = ?)type_sort_name,(select video_sort_name from video_sort where video_sort_id = ?)video_sort_name,(select language_name from video_language where language_id = ?)language_name'
+        ,record,(error,resultTime)=>{
+                if(error){
+                    console.log(error,1)
+                }else{
+                    // console.log(resultTime,results[0].videoSort_id)
+                 results[index].timeSort_id = resultTime[0].time_sort_name
+                 results[index].regionSort_id = resultTime[0].region_sort_name
+                 results[index].typeSort_id = resultTime[0].type_sort_name
+                 results[index].videoSort_id = resultTime[0].video_sort_name
+                 results[index].language_id = resultTime[0].language_name
+                //  console.log(results[index].timeSort_id,1)
+                }
+                if(index>=results.length-1){
+                    for(let index = 0;index<results.length;index++){
+                        data.header.Comic.push(results[index])
+                        // console.log(data.header.Recommend.recommendContent)
+                    }
+                }
+        })
+    }
+    // console.log(data.header.Recommend.recommendHeader)
+    // console.log(results) 
+    // console.log()
+    // for(let index = 0;index<results.length;index++){
+    //     data.header.Recommend.recommendHeader.push(results[index])
+    // }
+   
+})
 db.query(navigationSql, (error,results)=>{
     if(error){
         res.json({
@@ -189,26 +472,19 @@ db.query(navigationSql, (error,results)=>{
 
     //         },
     //     }}
-         let carouselSql = "select * from video ORDER BY create_time desc limit 9"
-
          
-
-         db.query(carouselSql,(error,results)=>{
-              if(error){
-                  console.log(error)
-              }else{
-
-                 data.header.carousel = results;
-              }
-         })
         //  for循环添加数据
            for (let  index = 0; index < results.length; index++) {
             data.header.nav[index].id = results[index].video_sort_id;
             data.header.nav[index].name = results[index].video_sort_name;
             data.header.nav[index].path = results[index].video_sort_path;
+           
+            console.log( results[index].video_sort_id)
               db.query('select * from type_sort where video_sort_id = ?',results[index].video_sort_id,(error,result)=>{
-                 for (let a = 0; a < result.length; a++) {
-                    data.header.nav[index].sobObject.push(result[a]);
+                // console.log(result)
+                for (let a = 0; a < result.length; a++) {
+                    result[a]
+                    data.header.nav[index].sobObject = result
                     // console.log('----');
                     // console.log(results.length,result.length);
                     // console.log(index >= results.length-1,a >= result.length-1)
@@ -290,7 +566,14 @@ router.get(`/${apiNames}/`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+        let   flag = false;
+
+        if(results.length==0){
+            res.json({
+                        code:201,
+                        message:'暂无当前分类影片'
+                    })
+        }
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -314,16 +597,20 @@ router.get(`/${apiNames}/`,(req,res)=>{
                      results[index].language_id = resultTime[0].language_name
                     //  console.log(results[index].timeSort_id,1)
                     }
+                    flag = true
                     if(index>=results.length-1){
-
+                      
                         res.json({
                             code:200,
                             total:total,
-                            data:results
+                            data:results,  
                         })
+                        return
                     }
             })
         }
+       
+
     }) 
      })
 })
@@ -367,7 +654,7 @@ router.get(`/${apiName}/Movie`,(req,res)=>{
       let videoId = [];
       let languageId = [];
       // for循环查询timeSort
-      var flag = false;
+      
       for(let index = 0;index<results.length;index++){
           // console.log(results[0].timeSort_id)
           timeId.push(results[index].timeSort_id)
@@ -444,7 +731,7 @@ router.get(`/${apiName}/Sitcom`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+        
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -521,7 +808,7 @@ router.get(`/${apiName}/Variety`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+        
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -598,7 +885,7 @@ router.get(`/${apiName}/Comic`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+        
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -675,7 +962,7 @@ router.get(`/${apiName}/ActionMovie`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+        
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -752,7 +1039,7 @@ router.get(`/${apiName}/Comedy`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+        
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -829,7 +1116,7 @@ router.get(`/${apiName}/Love`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+        
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -906,7 +1193,7 @@ router.get(`/${apiName}/ScienceFiction`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+       
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -983,7 +1270,7 @@ router.get(`/${apiName}/Horror`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+       
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -1060,7 +1347,7 @@ router.get(`/${apiName}/Plot`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+        
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -1137,7 +1424,7 @@ router.get(`/${apiName}/Warfare`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+       
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -1214,7 +1501,7 @@ router.get(`/${apiName}/Record`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+        
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -1291,7 +1578,7 @@ router.get(`/${apiName}/DomesticSeries`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+       
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -1368,7 +1655,7 @@ router.get(`/${apiName}/HtSeries`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+     
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -1445,7 +1732,7 @@ router.get(`/${apiName}/JkSeries`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+        
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -1522,7 +1809,7 @@ router.get(`/${apiName}/EaSeries`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+        
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -1599,7 +1886,7 @@ router.get(`/${apiName}/InlandVariety`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+        
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -1676,7 +1963,7 @@ router.get(`/${apiName}/HkVariety`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+       
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -1753,7 +2040,7 @@ router.get(`/${apiName}/JkVariety`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+      
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -1830,7 +2117,7 @@ router.get(`/${apiName}/EaVariety`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+        
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -1907,7 +2194,7 @@ router.get(`/${apiName}/DomesticAnimation`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+     
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -1984,7 +2271,7 @@ router.get(`/${apiName}/JkAnimation`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+       
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -2061,7 +2348,7 @@ router.get(`/${apiName}/EaAnimation`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+     
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -2138,7 +2425,7 @@ router.get(`/${apiName}/HkAnimation`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+       
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -2215,7 +2502,7 @@ router.get(`/${apiName}/OverseasAnimation`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+       
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -2276,7 +2563,7 @@ router.get(`/${apiName}/details/:id(\\d+)`,(req,res)=>{
         let videoId = [];
         let languageId = [];
         // for循环查询timeSort
-        var flag = false;
+      
         for(let index = 0;index<results.length;index++){
             // console.log(results[0].timeSort_id)
             timeId.push(results[index].timeSort_id)
@@ -2289,16 +2576,13 @@ router.get(`/${apiName}/details/:id(\\d+)`,(req,res)=>{
             db.query('select(select time_sort_name from time_sort where time_sort_id =?)time_sort_name ,(select region_sort_name from region_sort where region_sort_id = ?)region_sort_name,(select type_sort_name from type_sort where type_sort_id = ?)type_sort_name,(select video_sort_name from video_sort where video_sort_id = ?)video_sort_name,(select language_name from video_language where language_id = ?)language_name'
             ,record,(error,resultTime)=>{
                     if(error){
-                        // console.log(error,1)
                     }else{
-                        // console.log(resultTime)
                      results[index].timeSort_id = resultTime[0].time_sort_name
                      results[index].regionSort_id = resultTime[0].region_sort_name
                      results[index].typeSort_id = resultTime[0].type_sort_name
                      results[index].videoSort_id = resultTime[0].video_sort_name
                      
                      results[index].language_id = resultTime[0].language_name
-                    //  console.log(results[index].timeSort_id,1)
                     }
                     data.video = results
                     if(index>=results.length-1){
