@@ -51,28 +51,28 @@
             <h1>欢迎注册京东云新账号</h1>
             <hr />
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input placeholder="输入账号名" v-model="ruleForm.username">
               <i slot="prefix" class="el-input__icon el-icon-user"></i>
             </el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input placeholder="输入密码" v-model="ruleForm.password" show-password>
               <i slot="prefix" class="el-input__icon el-icon-lock"></i>
             </el-input>
           </el-form-item>
-          <el-form-item>
-            <el-input placeholder="输入邮箱" v-model="ruleForm.email" show-password>
+          <el-form-item prop="email">
+            <el-input placeholder="输入邮箱" v-model="ruleForm.email">
               <i slot="prefix" class="el-input__icon el-icon-lock"></i>
             </el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="phone">
             <el-input placeholder=" 输入常用手机号" v-model="ruleForm.phone">
               <i slot="prefix" class="el-input__icon el-icon-mobile-phone"></i>
             </el-input>
           </el-form-item>
           <el-row>
-            <el-col :offset="15">
+            <el-col :offset="11">
               <el-button type="primary" @click="register">注册</el-button>
               <el-button type="info" @click="resetForm">重置</el-button>
             </el-col>
@@ -95,20 +95,19 @@ export default {
       },
       rules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 2 到 8 个字符", trigger: "blur" }
+          { required: true, message: "请输入用户名，不能为空", trigger: "blur" },
+          { min: 2, max: 8, message: "长度在 2 到 8 个字符", trigger: "blur" }
         ],
         password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 6 到 18 个字符", trigger: "blur" }
+          { required: true, message: "请输入密码，不能为空", trigger: "blur" },
+          { min: 6, max: 18, message: "长度在 6 到 18 个字符", trigger: "blur" }
         ],
         email: [
-          { required: true, message: "请输入邮箱", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+          { required: true, message: "请输入邮箱，不能为空", trigger: "blur" },
         ],
         phone: [
-          { required: true, message: "请输入手机号", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+          { required: true, message: "请输入手机号，不能为空", trigger: "blur" },
+          { min: 11, max: 11, message: "长度在 11 个字符", trigger: "blur" }
         ]
       }
     };
@@ -133,7 +132,7 @@ export default {
         // 重置表单
         this.$refs.regForm.resetFields();
         // 路由跳转
-        this.$router = "/login";
+        // this.$router = "/login";
       });
     }
   }

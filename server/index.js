@@ -12,6 +12,7 @@ const app = express()
 // 引入 body-parser
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
+// 解决跨域问题
 var cors=require('cors');
 app.use(cors({
     origin:['http://localhost:8080'],  //指定接收的地址
