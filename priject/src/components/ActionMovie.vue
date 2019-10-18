@@ -21,6 +21,7 @@
       </div>
       <div class="sy-nav-down clearfix">
         <div class="sy clearfix" style="display: none;">
+          <!-- 分类 -->
           <dl class="clearfix">
             <dt>
               <span>按分类</span>
@@ -53,15 +54,16 @@
               <a href="Record">记录片</a>
             </dd>
           </dl>
+          <!-- 年代 -->
           <dl class="clearfix">
             <dt>
               <span>按年代</span>
             </dt>
-            <dd @click="years($event)">
-              <a href="#" class="on">全部</a>
+            <dd @click="whole($event)">
+              <a href="javascript:;" class="on">全部</a>
             </dd>
             <dd @click="years($event, item.id)" v-for="(item, index) in time" :key="index">
-              <a href="#">{{item.year}}</a>
+              <a href="javascript:;">{{item.year}}</a>
             </dd>
             <!-- <dd @click="years($event)">
               <a href="#">2018</a>
@@ -136,15 +138,16 @@
               <a href="#">1995</a>
             </dd>-->
           </dl>
+          <!-- 地区 -->
           <dl class="clearfix">
             <dt>
               <span>按地区</span>
             </dt>
-            <dd @click="region($event)">
-              <a href="#" class="on">全部</a>
+            <dd @click="entire($event)">
+              <a href="javascript:;" class="on">全部</a>
             </dd>
             <dd @click="region($event, item1.region_id)" v-for="(item1, index1) in area" :key="index1">
-              <a href="#">{{item1.region}}</a>
+              <a href="javascript:;">{{item1.region}}</a>
             </dd>
             <!-- <dd @click="query($event)">
               <a href="#">香港</a>
@@ -498,6 +501,65 @@ export default {
       }
       el.classList.add("on");
     },
+    // 年代>全部
+    async whole(event) {
+      // 获取子元素
+      let el = event.currentTarget.firstElementChild;
+      // 获取父级元素
+      let fu = event.currentTarget.parentElement;
+      for (var i = 0; i < fu.children.length; i++) {
+        for (var j = 0; j < fu.children[i].children.length; j++) {
+          fu.children[i].children[j].classList.remove("on");
+        }
+      }
+      el.classList.add("on");
+
+      this.time2_id = '';
+      if(this.area2_id == '') {
+        const { data: res } = await this.$http.get(
+          "/selectVideo?video_sort_id=1&type_sort_id=1&time_sort_id=&region_sort_id="
+        );
+        console.log(res);
+        // 如果没有成功，提示一下用户
+        if (res.code == 201) {
+          this.$message.error(res.message);
+          this.movieList = res.data;
+          this.total = res.total;
+        }else if(res.code == 200) {
+          // 刷新页面，重新获取数据
+          this.movieList = res.data;
+          this.total = res.total;
+        }
+      }else if(this.area2_id !== '') {
+        const { data: res } = await this.$http.get(
+          "/selectVideo?video_sort_id=1&type_sort_id=1&time_sort_id=&region_sort_id="+this.area2_id
+        );
+        console.log(res);
+        // 如果没有成功，提示一下用户
+        if (res.code == 201) {
+          this.$message.error(res.message);
+          this.movieList = res.data;
+          this.total = res.total;
+        }else if(res.code == 200) {
+          // 刷新页面，重新获取数据
+          this.movieList = res.data;
+          this.total = res.total;
+        }
+      }
+      /* else if(this.area2_id == '' && this.time2_id == ''){
+        const { data: res } = await this.$http.get(
+          "/selectVideo?video_sort_id=1&type_sort_id=1"
+        );
+        console.log(res);
+        // 如果没有成功，提示一下用户
+        if (res.code !== 200) {
+          return this.$message.error("获取电影列表失败！");
+        }
+        this.movieList = res.data;
+        this.total = res.total;
+        this.area2_id = "";
+      } */
+    },
     // 年代
     async years(event, id) {
       // 获取子元素
@@ -548,8 +610,66 @@ export default {
           this.total = res.total;
         }
       }
+    },
+    // 地区>全部
+    async entire(event) {
+      // 获取子元素
+      let el = event.currentTarget.firstElementChild;
+      // 获取父级元素
+      let fu = event.currentTarget.parentElement;
+      for (var i = 0; i < fu.children.length; i++) {
+        for (var j = 0; j < fu.children[i].children.length; j++) {
+          fu.children[i].children[j].classList.remove("on");
+        }
+      }
+      el.classList.add("on");
 
-      
+      this.area2_id = '';
+
+      if(this.time2_id == '') {
+        const { data: res } = await this.$http.get(
+          "/selectVideo?video_sort_id=1&type_sort_id=1&time_sort_id=&region_sort_id="
+        );
+        console.log(res);
+        // 如果没有成功，提示一下用户
+        if (res.code == 201) {
+          this.$message.error(res.message);
+          this.movieList = res.data;
+          this.total = res.total;
+        }else if(res.code == 200) {
+          // 刷新页面，重新获取数据
+          this.movieList = res.data;
+          this.total = res.total;
+        }
+      } else if(this.time2_id !== '') {
+        const { data: res } = await this.$http.get(
+          "/selectVideo?video_sort_id=1&type_sort_id=1&time_sort_id="+this.time2_id+"&region_sort_id="
+        );
+        console.log(res);
+        // 如果没有成功，提示一下用户
+        if (res.code == 201) {
+          this.$message.error(res.message);
+          this.movieList = res.data;
+          this.total = res.total;
+        }else if(res.code == 200) {
+          // 刷新页面，重新获取数据
+          this.movieList = res.data;
+          this.total = res.total;
+        }
+      }
+      /* else if(this.area2_id == '' && this.time2_id == ''){
+        const { data: res } = await this.$http.get(
+          "/selectVideo?video_sort_id=1&type_sort_id=1"
+        );
+        console.log(res);
+        // 如果没有成功，提示一下用户
+        if (res.code !== 200) {
+          return this.$message.error("获取电影列表失败！");
+        }
+        this.movieList = res.data;
+        this.total = res.total;
+        this.time2_id = "";
+      } */
     },
     // 地区
     async region(event, region_id) {
@@ -564,7 +684,7 @@ export default {
       }
       el.classList.add("on");
 
-      console.log(region_id);
+      // console.log(region_id);
 
       this.area2_id = region_id;
 
@@ -598,7 +718,7 @@ export default {
           this.movieList = res.data;
           this.total = res.total;
         }
-      }     
+      }
     },
     // 跳转
     async jump(id) {
@@ -609,7 +729,7 @@ export default {
       if(res.code !== 200) {
         return this.$message.error("跳转失败");
       }
-      // this.$router.push(res.data.video[0].video_path);
+      // this.$router.push("/details");
     }
   }
 };
