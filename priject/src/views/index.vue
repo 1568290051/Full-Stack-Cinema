@@ -20,7 +20,6 @@
                 >
                   <el-menu-item index="/home">首页</el-menu-item>
                   <el-submenu :index="item.path" v-for="item in menuList" :key="item.id">
-                    {{item}}
                     <template slot="title">{{item.name}}</template>
                     <el-menu-item
                       :index="item2.type_sort_path"
@@ -104,8 +103,7 @@ export default {
       const { data: res } = await this.$http.get("/cinema");
    console.log(res)
       if (res.code == 200) {
-        this.menuList = res.data.header.nav[0];
-         console.log(this.menuList)
+        this.menuList = res.data.header.nav;
       }
      
       
