@@ -26,7 +26,7 @@ export default new Router({
         {
           // 电影详情路由
           path: "/details",
-          component: () => import("./components/details.vue")
+          component: () => import("./components/Details.vue")
         },
         // 动作片
         {
