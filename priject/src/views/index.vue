@@ -103,7 +103,7 @@ export default {
       const { data: res } = await this.$http.get("/cinema");
       console.log(res.code);
       if (res.code == 200) {
-        this.menuList = res.data.header.nav;
+        this.menuList = res.data.header.nav[0];
       }
     }
   },
@@ -113,6 +113,10 @@ export default {
 };
 </script>
 <style>
+* {
+  margin: 0;
+  padding: 0;
+}
 /* 初始化 */
 html,
 body {
@@ -120,6 +124,7 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
+  overflow-y: hidden
 }
 #app {
   width: 100%;
@@ -172,4 +177,6 @@ body {
   text-align: center;
   line-height: 30px;
 }
+
+
 </style>

@@ -24,9 +24,54 @@ export default new Router({
             import("./components/Movie_describe/Movie_MengMianGeWang.vue")
         },
         {
+<<<<<<< Updated upstream
           // 电影详情路由
           path: "/details",
           component: () => import("./components/details.vue")
+=======
+          path:'/login',
+          component:()=> import('./components/Login.vue'),
+        },
+        // 动作片        
+        {
+          path: "/ActionMovie",
+          component: () => import("./components/ActionMovie.vue")
+        },
+        // 喜剧片
+        {
+          path: "/Comedy",
+          component: () => import("./components/Comedy.vue")
+        },
+        // 爱情片
+        {
+          path: "/love",
+          component: () => import("./components/Love.vue")
+        },
+        // 科幻片
+        {
+          path: "/scienceFiction",
+          component: () => import("./components/ScienceFiction.vue")
+        },
+        // 恐怖片
+        {
+          path: "/Horror",
+          component: () => import("./components/Horror.vue")
+        },
+        // 剧情片
+        {
+          path: "/plot",
+          component: () => import("./components/Plot.vue")
+        },
+        // 战争片
+        {
+          path: "/Warfare",
+          component: () => import("./components/Warfare.vue")
+        },
+        // 纪录片
+        {
+          path: "/Record",
+          component: () => import("./components/Record.vue")
+>>>>>>> Stashed changes
         }
       ]
     },

@@ -7,20 +7,20 @@
         <ul class="viewpage_type_area_left all" @click="circulation">
           <li v-for="(item,index) in ulData" :key="index" class="li reveal">
             <!-- 宣传照 -->
-            <img :src="item.cover_path" :title="item.video_name" class="publicity" />
+            <img :src="item.cover_path" :title="item.video_name" class="publicity">
             <div class="right-message">
               <!-- 标题 -->
               <div class="right-message-title">
                 <div>{{item.video_name}}</div>
                 <span style="color:#fe6500;font-size:12px;">HD</span>
-                <br />
+                <br>
                 <!-- 影片信息 -->
                 <div class="right-information">
                   <span class="information_option" style="width:500px;">
                     <label for>主演:</label>
                     {{item.to_star}}
                   </span>
-                  <br />
+                  <br>
                   <div class="information_option">
                     <label for>类型:</label>
                     {{item.typeSort_id}}
@@ -48,7 +48,7 @@
           <div class="Sudoku">
             <ul class="Sudoku_ui">
               <li v-for="(item,index) in ulData " :key="index">
-                <img :src="item.cover_path" alt />
+                <img :src="item.cover_path" alt>
               </li>
             </ul>
           </div>
@@ -209,12 +209,12 @@ export default {
       alink = document.querySelectorAll(".viewpage_type_area_left .li");
       let section = document.querySelectorAll(".Sudoku_ui li");
       var i = 1;
-       alink[0].style.display = "block";
-        section[0].style.border = "1px solid #ff6600 ";
-     var dsq= setInterval(() => {
+      alink[0].style.display = "block";
+      section[0].style.border = "1px solid #ff6600 ";
+      var dsq = setInterval(() => {
         if (i == 9) {
-            section[8].style.border = "1px solid #cfd0d1 ";
-            alink[8].style.display = "none";
+          section[8].style.border = "1px solid #cfd0d1 ";
+          alink[8].style.display = "none";
           i = 0;
         }
         i++;
@@ -224,7 +224,7 @@ export default {
         section[i - 2].style.border = "1px solid #cfd0d1 ";
         if (i == 8) {
           section[9].style.border = "1px solid #ff6600 ";
-           alink[9].style.display = "block";
+          alink[9].style.display = "block";
         }
         if (i == 0) {
           section[8].style.border = "1px solid #cfd0d1 ";
@@ -232,15 +232,15 @@ export default {
         }
       }, 2000);
 
-    //   for(var j= 0;j<section.length;j++){
-    //       section[i].onclick=function(){
+      //   for(var j= 0;j<section.length;j++){
+      //       section[i].onclick=function(){
 
-    //       }
-    //   }
+      //       }
+      //   }
     }
   },
-  mounted(){
-  this.circulation();
+  mounted() {
+    this.circulation();
   }
 };
 </script>
