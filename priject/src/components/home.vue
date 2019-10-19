@@ -5,22 +5,22 @@
       <!-- 版心 -->
       <div class="viewpage_type_area )">
         <ul class="viewpage_type_area_left all">
-          <li v-for="(item,index) in ulData" :key="index" class="li reveal">
+          <li v-for="(item,index) in ulData" :key="index" class="li reveal"  @click="jum(item.video_id)">
             <!-- 宣传照 -->
-            <img :src="item.cover_path" :title="item.video_name" class="publicity">
+            <img :src="item.cover_path" :title="item.video_name" class="publicity" />
             <div class="right-message">
               <!-- 标题 -->
               <div class="right-message-title">
                 <div>{{item.video_name}}</div>
                 <span style="color:#fe6500;font-size:12px;">HD</span>
-                <br>
+                <br />
                 <!-- 影片信息 -->
                 <div class="right-information">
                   <span class="information_option" style="width:500px;">
                     <label for>主演:</label>
                     {{item.to_star}}
                   </span>
-                  <br>
+                  <br />
                   <div class="information_option">
                     <label for>类型:</label>
                     {{item.typeSort_id}}
@@ -33,9 +33,9 @@
                     <label for>年份:</label>
                     {{item.timeSort_id}}
                   </div>
-                  <div class="information_option">
+                  <div class="information_option"  v-if="item.create_time">
                     <label for>时间:</label>
-                    {{item.create_time}}
+                    <span> {{item.create_time.substring(0,10)}}</span>
                   </div>
                 </div>
               </div>
@@ -48,7 +48,7 @@
           <div class="Sudoku">
             <ul class="Sudoku_ui">
               <li v-for="(item,index) in ulData " :key="index">
-                <img :src="item.cover_path" alt>
+                <img :src="item.cover_path" alt />
               </li>
             </ul>
           </div>
@@ -62,9 +62,9 @@
           <span>推荐影视</span>
           <span class="recommend_a">
             <a
-              href
               v-for="item_header in random_data_header"
               :key="item_header.video_id"
+              @click="jum(item_header.video_id)"
             >{{item_header.video_name}}</a>
           </span>
         </div>
@@ -81,8 +81,9 @@
             class="H1_P1"
             v-for="item_content in random_data_Content "
             :key="item_content.video_id"
+                 @click="jum(item_content.video_id)"
           >
-            <a href="/home">
+            <a >
               <img :src="item_content.cover_path" alt />
 
               <span class="video-bg"></span>
@@ -103,8 +104,8 @@
           <!-- 假数据 -->
         </ul>
         <ul class="H2—1">
-          <li v-for="(item_right,index) in random_data_Right" :key="item_right.video_id">
-            <a href style="  text-decoration: none;">
+          <li v-for="(item_right,index) in random_data_Right" :key="item_right.video_id"       @click="jum(item_right.video_id)">
+            <a  style="  text-decoration: none;">
               <span class="gm">{{0+index+1}}</span>
               <span class="H2—1_title" title="东游2019">{{item_right.video_name}}</span>
               <span>HD</span>
@@ -121,18 +122,25 @@
           <h1>电影片</h1>
           <ul class="film_ul">
             <li>
-              <a href>更多>></a>
+              <a >更多>></a>
             </li>
-            <li v-for="(movie_item,index) in classify_data" :key="index">
-              <a href>{{movie_item.type_sort_name}}</a>
+            <li v-for="(movie_item,index) in classify_data" :key="index" >
+              <a>{{movie_item.type_sort_name}}</a>
             </li>
           </ul>
         </div>
         <!-- 视屏部分 -->
         <div class="film_video">
           <ul class="H1_P" style="width:1200px;height:500px;">
-            <li class="H1_P1" style="width:181px;height:230px; margin-right: 18px;" v-for="(item,index) in movie" :key="index">
-              <a href="/home">
+            <li
+              class="H1_P1"
+              style="width:181px;height:230px; margin-right: 18px;"
+              v-for="(item,index) in movie"
+              :key="index"
+               @click="jum(item.video_id)"
+              
+            >
+              <a >
                 <img :src="item.cover_path" alt />
 
                 <span class="video-bg"></span>
@@ -150,10 +158,6 @@
                 </p>
               </a>
             </li>
-
-
-
-          
           </ul>
         </div>
       </div>
@@ -176,8 +180,14 @@
         <!-- 视屏部分 -->
         <div class="film_video">
           <ul class="H1_P" style="width:1200px;height:500px;">
-            <li class="H1_P1" style="width:181px;height:230px; margin-right: 18px;"  v-for="(item,index) in Sitcom" :key="index">
-               <a href="/home">
+            <li
+              class="H1_P1"
+              style="width:181px;height:230px; margin-right: 18px;"
+              v-for="(item,index) in Sitcom"
+              :key="index"
+                @click="jum(item.video_id)"
+            >
+              <a >
                 <img :src="item.cover_path" alt />
 
                 <span class="video-bg"></span>
@@ -196,61 +206,7 @@
               </a>
             </li>
             <!-- 假数据 -->
-            <li class="H1_P1" style="width:181px;height:230px;">
-              <a href="/home">
-                <img src="../assets/cover_img/无畏2019.jpg" alt />
-              </a>
-            </li>
-            <li class="H1_P1" style="width:181px;height:230px; margin-right: 18px;">
-              <a href="/home">
-                <img src="../assets/cover_img/无畏2019.jpg" alt />
-              </a>
-            </li>
-            <li class="H1_P1" style="width:181px;height:230px; margin-right: 18px;">
-              <a href="/home">
-                <img src="../assets/cover_img/无畏2019.jpg" alt />
-              </a>
-            </li>
-            <li class="H1_P1" style="width:181px;height:230px; margin-right: 18px;">
-              <a href="/home">
-                <img src="../assets/cover_img/无畏2019.jpg" alt />
-              </a>
-            </li>
-            <li class="H1_P1" style="width:181px;height:230px; margin-right: 18px;">
-              <a href="/home">
-                <img src="../assets/cover_img/无畏2019.jpg" alt />
-              </a>
-            </li>
-            <li class="H1_P1" style="width:181px;height:230px; margin-right: 18px;">
-              <a href="/home">
-                <img src="../assets/cover_img/无畏2019.jpg" alt />
-              </a>
-            </li>
-            <li class="H1_P1" style="width:181px;height:230px; margin-right: 18px;">
-              <a href="/home">
-                <img src="../assets/cover_img/无畏2019.jpg" alt />
-              </a>
-            </li>
-            <li class="H1_P1" style="width:181px;height:230px; margin-right: 18px;">
-              <a href="/home">
-                <img src="../assets/cover_img/无畏2019.jpg" alt />
-              </a>
-            </li>
-            <li class="H1_P1" style="width:181px;height:230px; margin-right: 18px;">
-              <a href="/home">
-                <img src="../assets/cover_img/无畏2019.jpg" alt />
-              </a>
-            </li>
-            <li class="H1_P1" style="width:181px;height:230px; margin-right: 18px;">
-              <a href="/home">
-                <img src="../assets/cover_img/无畏2019.jpg" alt />
-              </a>
-            </li>
-            <li class="H1_P1" style="width:181px;height:230px; margin-right: 18px;">
-              <a href="/home">
-                <img src="../assets/cover_img/无畏2019.jpg" alt />
-              </a>
-            </li>
+           
           </ul>
         </div>
       </div>
@@ -263,7 +219,7 @@
           <h1>动漫片</h1>
           <ul class="film_ul">
             <li>
-              <a href>更多>></a>
+              <a >更多>></a>
             </li>
             <li v-for="(movie_item,index) in classify_dataC" :key="index">
               <a href>{{movie_item.type_sort_name}}</a>
@@ -273,10 +229,13 @@
         <!-- 视屏部分 -->
         <div class="film_video">
           <ul class="H1_P" style="width:1200px;height:500px;">
-            <li class="H1_P1" style="width:181px;height:230px; margin-right: 18px;" v-for="(item,index) in Comic" :key="index">
-             <a href="/home">
-                <img :src="item.cover_path" alt />
-
+            <li
+              class="H1_P1"
+              style="width:181px;height:230px; margin-right: 18px;"
+              v-for="(item,index) in Comic"
+              :key="index"
+              @click="jum(item.video_id)"
+              >
                 <span class="video-bg"></span>
                 <span class="lzbz">
                   <p
@@ -292,7 +251,6 @@
                 </p>
               </a>
             </li>
-           
           </ul>
         </div>
       </div>
@@ -310,19 +268,15 @@ export default {
         {
           video_id: "", //视频id
           video_name: "中国机长e21e21e12e12e12e12e12e12e1", //视频名字
-          cover_path:
-            "",
+          cover_path: "",
           video_path: "", //视频路径
-          to_star:
-            "", //主演
+          to_star: "", //主演
           director: "", //导演
           typeSort_id: "1",
           timeSort: "2019", //年份
           datetime: "2019-10-2", //上线时间
-          plot:
-            "" //剧情
+          plot: "" //剧情
         }
- 
       ],
       // 视屏分类数据
       classify_data: [],
@@ -336,11 +290,11 @@ export default {
       // 右边推荐部分
       random_data_Right: [],
       // 电视剧
-       Sitcom:[],
+      Sitcom: [],
       // 动漫
-      Comic:[],
-      movie:[]
-     
+      Comic: [],
+      movie: [],
+      video_id:''
     };
   },
   methods: {
@@ -349,6 +303,7 @@ export default {
       let alink = [];
       alink = document.querySelectorAll(".viewpage_type_area_left .li");
       let section = document.querySelectorAll(".Sudoku_ui li");
+      let Sudoku_ui = document.querySelector(".Sudoku_ui");
 
       alink[0].style.display = "block";
       section[0].style.border = "1px solid #ff6600 ";
@@ -383,22 +338,39 @@ export default {
       }, 2000);
 
       // 九宫格
-      //   for(let k = 0;k <section.length;k++){
-      //       section[k].onclick=function(){
-      //           console.log(this)
-      //            console.log(k)
-      //           this.style.border = "1px solid #ff6600 ";
-      //             section[k].style.border = "1px solid #cfd0d1 ";
-      //             clearInterval(dsq)
-      //       }
-      //   }
+      for (let k = 0; k < section.length; k++) {
+        // 鼠标点击 进去 停止轮播
+        section[k].onclick = function() {
+          clearInterval(dsq);
+          for (var j = 0; j < section.length; j++) {
+            section[j].style.border = "1px solid #cfd0d1 ";
+            alink[j].style.display = "none";
+          }
+
+          this.style.border = "1px solid #ff6600 ";
+          alink[k].style.display = "block";
+       
+          // section[k].onmouseout = function() {
+          //   console.log(k);
+          // };
+          //   Sudoku_ui.onmouseout = function() {
+          // i = k;
+          // dsq = setInterval(() => {}, 1000);
+        // };
+        };
+           // 鼠标移出来 轮播 图开始
+      
+      }
     },
     // 获取数据
     async get_ulData() {
       const { data: res } = await this.$http.get("/cinema");
+      console.log(res)
       if ((res.code = 200)) {
         // 轮播图数据
         this.ulData = res.data.header.carousel;
+                        // .substring(0,10)
+                        console.log( res.data.header.carousel)
         // 视屏分类数据
         this.classify_data = res.data.header.nav[0].sobObject;
         this.classify_dataB = res.data.header.nav[1].sobObject;
@@ -408,30 +380,30 @@ export default {
         this.random_data_Content = res.data.header.Recommend.recommendContent;
         this.random_data_Right = res.data.header.Recommend.recommendRight;
         this.Comic = res.data.header.Comic;
-        this.Sitcom =res.data.header.Sitcom;
-           this.movie =res.data.header.movie;
+        this.Sitcom = res.data.header.Sitcom;
+        this.movie = res.data.header.movie;
       }
       //  console.log( res)
       // console.log( this.Comic)
       //   console.log( this.Sitcom)
       //     console.log( this.movie)
-   
+    },
+    // 获取每个 视频的 id
+    async jum(id){
+      console.log(id)
+        const { data: res } = await this.$http.get(`/cinema/details/${id}`);
+      this.video_id = res.data.Videp
     }
   },
   created() {
     // 获取数据
     this.get_ulData();
   },
-  mounted() {
-    
+  mounted() {},
+  updated() {
+    this.circulation();
   },
-  updated(){
-   this.circulation();
-
-  },
-   beforeMount(){
-       
-   }
+  beforeMount() {}
 };
 </script>
 <style >
@@ -478,9 +450,9 @@ ul {
 /* 信息 */
 .right-message {
   padding: 0 10px;
-position: absolute;
-top: 0px;
-right:0px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
   width: 716px;
   height: 310px;
   background-color: #1c1c1c;
@@ -516,13 +488,13 @@ right:0px;
   right: -196px;
   /* top: 120px;
 right: 316px; */
-  width: 207px;
-  height: 257px;
+  width: 200px;
+  height: 256px;
   background-color: black;
 }
 .Sudoku_ui {
-  width: 230px;
-  height: 228px;
+  width: 207px;
+  height: 258px;
   padding: 0px;
   list-style: none;
 }
@@ -552,8 +524,10 @@ right: 316px; */
   height: 67px;
   background-color: #e9e8ef;
   margin-bottom: 20px;
-
-  
+}
+a{
+  text-decoration:none;
+  cursor: pointer;
 }
 .recommend_middle {
   overflow: hidden;
