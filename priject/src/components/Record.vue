@@ -4,14 +4,14 @@
       <el-breadcrumb separator-class="el-icon-arrow-right" class="title">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>
-          <a href="Record">记录片</a>
+          <a href="Record">纪录片</a>
         </el-breadcrumb-item>
       </el-breadcrumb>
     </h1>
     <div class="sy-all mb">
       <div class="sy-title">
         <p class="type">
-          <span class="type">记录片</span>
+          <span class="type">纪录片</span>
         </p>
         <p class="chg" @click="screen">
           筛选
@@ -21,6 +21,7 @@
       </div>
       <div class="sy-nav-down clearfix">
         <div class="sy clearfix" style="display: none;">
+          <!-- 分类 -->
           <dl class="clearfix">
             <dt>
               <span>按分类</span>
@@ -53,143 +54,28 @@
               <a href="Record" class="on">记录片</a>
             </dd>
           </dl>
+          <!-- 年代 -->
           <dl class="clearfix">
             <dt>
               <span>按年代</span>
             </dt>
-            <dd @click="query($event)">
-              <a href="#" class="on">全部</a>
+            <dd @click="whole($event)">
+              <a href="javascript:;" class="on">全部</a>
             </dd>
-            <dd @click="query($event)">
-              <a href="#">2019</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2018</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2017</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2016</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2015</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2014</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2013</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2012</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2011</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2010</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2009</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2008</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2007</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2006</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2005</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2004</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2003</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2002</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2001</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">2000</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">1999</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">1998</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">1997</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">1996</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">1995</a>
+            <dd @click="years($event, item.id)" v-for="(item, index) in time" :key="index">
+              <a href="javascript:;">{{item.year}}</a>
             </dd>
           </dl>
+          <!-- 地区 -->
           <dl class="clearfix">
             <dt>
               <span>按地区</span>
             </dt>
-            <dd @click="query($event)">
-              <a href="#" class="on">全部</a>
+            <dd @click="entire($event)">
+              <a href="javascript:;" class="on">全部</a>
             </dd>
-            <dd @click="query($event)">
-              <a href="#">大陆</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">香港</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">台湾</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">美国</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">韩国</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">日本</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">泰国</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">新加坡</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">马来西亚</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">印度</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">英国</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">法国</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">加拿大</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">西班牙</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">俄罗斯</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="#">其他</a>
+            <dd @click="region($event, item1.region_id)" v-for="(item1, index1) in area" :key="index1">
+              <a href="javascript:;">{{item1.region}}</a>
             </dd>
           </dl>
         </div>
@@ -197,8 +83,7 @@
     </div>
     <div class="sy-jg mb">
       <p class="jg">
-        共
-        <span class="count">{{total}}</span>个筛选结果
+        共<span class="count">{{total}}</span>个筛选结果
       </p>
       <p class="px">
         <a class="time on" href="#">
@@ -217,14 +102,14 @@
     </div>
     <div class="index-area clearfix">
       <ul>
-        <li class="p1 m1" v-for="(item,index) in movieList" :key="index">
-          <router-link class="link-hover" :to="item.video_path" :title="item.video_name">
+        <li class="p1 m1" v-for="(item,index) in movieList" :key="index" @click="jump(item.video_id)">
+          <router-link class="link-hover" to="" :title="item.video_name">
             <img
               class="lazy"
               :src="item.cover_path"
               :alt="item.video_name"
               style="display: inline;"
-            >
+            >            
             <span class="video-bg"></span>
             <span class="lzbz">
               <p class="name">{{item.video_name}}</p>
@@ -253,6 +138,9 @@
 </template>
 
 <script>
+// 引入公共vue实例
+import bus from "../eventBus"
+
 export default {
   data() {
     return {
@@ -263,7 +151,181 @@ export default {
       // 总条数
       total: 0,
       // 电影列表
-      movieList: []
+      movieList: [],
+      // 年代
+      time: [
+        {
+          id: 25,
+          year: 2019
+        },
+        {
+          id: 24,
+          year: 2018
+        },
+        {
+          id: 23,
+          year: 2017
+        },
+        {
+          id: 22,
+          year: 2016
+        },
+        {
+          id: 21,
+          year: 2015
+        },
+        {
+          id: 20,
+          year: 2014
+        },
+        {
+          id: 19,
+          year: 2013
+        },
+        {
+          id: 18,
+          year: 2012
+        },
+        {
+          id: 17,
+          year: 2011
+        },
+        {
+          id: 16,
+          year: 2010
+        },
+        {
+          id: 15,
+          year: 2009
+        },
+        {
+          id: 14,
+          year: 2008
+        },
+        {
+          id: 13,
+          year: 2007
+        },
+        {
+          id: 12,
+          year: 2006
+        },
+        {
+          id: 11,
+          year: 2005
+        },
+        {
+          id: 10,
+          year: 2004
+        },
+        {
+          id: 9,
+          year: 2003
+        },
+        {
+          id: 8,
+          year: 2002
+        },
+        {
+          id: 7,
+          year: 2001
+        },
+        {
+          id: 6,
+          year: 2000
+        },
+        {
+          id: 5,
+          year: 1999
+        },
+        {
+          id: 4,
+          year: 1998
+        },
+        {
+          id: 3,
+          year: 1997
+        },
+        {
+          id: 2,
+          year: 1996
+        },
+        {
+          id: 1,
+          year: 1995
+        }
+      ],
+      time2_id: '',
+      // 地区
+      area: [
+        {
+          region_id: 1,
+          region: "大陆"
+        },
+        {
+          region_id: 2,
+          region: "香港"
+        },
+        {
+          region_id: 3,
+          region: "台湾"
+        },
+        {
+          region_id: 4,
+          region: "美国"
+        },
+        {
+          region_id: 5,
+          region: "韩国"
+        },
+        {
+          region_id: 6,
+          region: "日本"
+        },
+        {
+          region_id: 7,
+          region: "泰国"
+        },
+        {
+          region_id: 8,
+          region: "新加坡"
+        },
+        {
+          region_id: 9,
+          region: "马来西亚"
+        },
+        {
+          region_id: 10,
+          region: "印度"
+        },
+        {
+          region_id: 11,
+          region: "英国"
+        },
+        {
+          region_id: 12,
+          region: "法国"
+        },
+        {
+          region_id: 13,
+          region: "加拿大"
+        },
+        {
+          region_id: 14,
+          region: "西班牙"
+        },
+        {
+          region_id: 15,
+          region: "俄罗斯"
+        },
+        {
+          region_id: 16,
+          region: "未知"
+        }
+      ],
+      area2_id: '',
+      // 传给电影详情的id数据容器
+      movieID: []
     };
   },
   created: function() {
@@ -273,7 +335,7 @@ export default {
     // 获取电影列表
     async getMovieList() {
       const { data: res } = await this.$http.get(
-        "/selectVideo?video_sort_id=1&type_sort_id=8"
+        "/selectVideo?video_sort_id=1&type_sort_id=8&time_sort_id=&region_sort_id="
       );
       console.log(res);
       // 如果没有成功，提示一下用户
@@ -326,6 +388,215 @@ export default {
         }
       }
       el.classList.add("on");
+    },
+    // 年代>全部
+    async whole(event) {
+      // 获取子元素
+      let el = event.currentTarget.firstElementChild;
+      // 获取父级元素
+      let fu = event.currentTarget.parentElement;
+      for (var i = 0; i < fu.children.length; i++) {
+        for (var j = 0; j < fu.children[i].children.length; j++) {
+          fu.children[i].children[j].classList.remove("on");
+        }
+      }
+      el.classList.add("on");
+
+      this.time2_id = '';
+      if(this.area2_id == '') {
+        const { data: res } = await this.$http.get(
+          "/selectVideo?video_sort_id=1&type_sort_id=8&time_sort_id=&region_sort_id="
+        );
+        console.log(res);
+        // 如果没有成功，提示一下用户
+        if (res.code == 201) {
+          this.$message.error(res.message);
+          this.movieList = res.data;
+          this.total = res.total;
+        }else if(res.code == 200) {
+          // 刷新页面，重新获取数据
+          this.movieList = res.data;
+          this.total = res.total;
+        }
+      }else if(this.area2_id !== '') {
+        const { data: res } = await this.$http.get(
+          "/selectVideo?video_sort_id=1&type_sort_id=8&time_sort_id=&region_sort_id="+this.area2_id
+        );
+        console.log(res);
+        // 如果没有成功，提示一下用户
+        if (res.code == 201) {
+          this.$message.error(res.message);
+          this.movieList = res.data;
+          this.total = res.total;
+        }else if(res.code == 200) {
+          // 刷新页面，重新获取数据
+          this.movieList = res.data;
+          this.total = res.total;
+        }
+      }
+    },
+    // 年代
+    async years(event, id) {
+      // 获取子元素
+      let el = event.currentTarget.firstElementChild;
+      // 获取父级元素
+      let fu = event.currentTarget.parentElement;
+      for (var i = 0; i < fu.children.length; i++) {
+        for (var j = 0; j < fu.children[i].children.length; j++) {
+          fu.children[i].children[j].classList.remove("on");
+        }
+      }
+      el.classList.add("on");
+
+      // console.log(id);
+
+      this.time2_id = id;
+
+      console.log(this.time2_id);
+
+      if(this.area2_id == '') {
+        const { data: res } = await this.$http.get(
+          "/selectVideo?video_sort_id=1&type_sort_id=8&time_sort_id="+this.time2_id+"&region_sort_id="
+        );
+        console.log(res);
+        // 如果没有成功，提示一下用户
+        if (res.code == 201) {
+          this.$message.error(res.message);
+          this.movieList = res.data;
+          this.total = res.total;
+        }else if(res.code == 200) {
+          // 刷新页面，重新获取数据
+          this.movieList = res.data;
+          this.total = res.total;
+        }
+      }else if(this.area2_id !== '') {
+        const { data: res } = await this.$http.get(
+          "/selectVideo?video_sort_id=1&type_sort_id=8&time_sort_id="+this.time2_id+"&region_sort_id="+this.area2_id
+        );
+        console.log(res);
+        // 如果没有成功，提示一下用户
+        if (res.code == 201) {
+          this.$message.error(res.message);
+          this.movieList = res.data;
+          this.total = res.total;
+        }else if(res.code == 200) {
+          // 刷新页面，重新获取数据
+          this.movieList = res.data;
+          this.total = res.total;
+        }
+      }
+    },
+    // 地区>全部
+    async entire(event) {
+      // 获取子元素
+      let el = event.currentTarget.firstElementChild;
+      // 获取父级元素
+      let fu = event.currentTarget.parentElement;
+      for (var i = 0; i < fu.children.length; i++) {
+        for (var j = 0; j < fu.children[i].children.length; j++) {
+          fu.children[i].children[j].classList.remove("on");
+        }
+      }
+      el.classList.add("on");
+
+      this.area2_id = '';
+
+      if(this.time2_id == '') {
+        const { data: res } = await this.$http.get(
+          "/selectVideo?video_sort_id=1&type_sort_id=8&time_sort_id=&region_sort_id="
+        );
+        console.log(res);
+        // 如果没有成功，提示一下用户
+        if (res.code == 201) {
+          this.$message.error(res.message);
+          this.movieList = res.data;
+          this.total = res.total;
+        }else if(res.code == 200) {
+          // 刷新页面，重新获取数据
+          this.movieList = res.data;
+          this.total = res.total;
+        }
+      } else if(this.time2_id !== '') {
+        const { data: res } = await this.$http.get(
+          "/selectVideo?video_sort_id=1&type_sort_id=8&time_sort_id="+this.time2_id+"&region_sort_id="
+        );
+        console.log(res);
+        // 如果没有成功，提示一下用户
+        if (res.code == 201) {
+          this.$message.error(res.message);
+          this.movieList = res.data;
+          this.total = res.total;
+        }else if(res.code == 200) {
+          // 刷新页面，重新获取数据
+          this.movieList = res.data;
+          this.total = res.total;
+        }
+      }
+    },
+    // 地区
+    async region(event, region_id) {
+      // 获取子元素
+      let el = event.currentTarget.firstElementChild;
+      // 获取父级元素
+      let fu = event.currentTarget.parentElement;
+      for (var i = 0; i < fu.children.length; i++) {
+        for (var j = 0; j < fu.children[i].children.length; j++) {
+          fu.children[i].children[j].classList.remove("on");
+        }
+      }
+      el.classList.add("on");
+
+      // console.log(region_id);
+
+      this.area2_id = region_id;
+
+      if(this.time2_id == '') {
+        const { data: res } = await this.$http.get(
+          "/selectVideo?video_sort_id=1&type_sort_id=8&time_sort_id="+"&region_sort_id="+this.area2_id
+        );
+        console.log(res);
+        // 如果没有成功，提示一下用户
+        if (res.code == 201) {
+          this.$message.error(res.message);
+          this.movieList = res.data;
+          this.total = res.total;
+        }else if(res.code == 200) {
+          // 刷新页面，重新获取数据
+          this.movieList = res.data;
+          this.total = res.total;
+        }
+      } else if(this.time2_id !== '') {
+        const { data: res } = await this.$http.get(
+          "/selectVideo?video_sort_id=1&type_sort_id=8&time_sort_id="+this.time2_id+"&region_sort_id="+this.area2_id
+        );
+        console.log(res);
+        // 如果没有成功，提示一下用户
+        if (res.code == 201) {
+          this.$message.error(res.message);
+          this.movieList = res.data;
+          this.total = res.total;
+        }else if(res.code == 200) {
+          // 刷新页面，重新获取数据
+          this.movieList = res.data;
+          this.total = res.total;
+        }
+      }
+    },
+    // 跳转到电影详情
+    async jump(id) {
+      console.log(id);
+      const { data: res } = await this.$http.get(`/cinema/details/${id}`);
+      console.log(res);
+
+      if(res.code !== 200) {
+        return this.$message.error("跳转失败");
+      }
+      // 把得到的电影ID存到容器里
+      this.movieID = res.data.video[0].video_id
+      // console.log(this.movieID + '==========')
+      // 把容器里的数据发送到电影详情组件里
+      bus.$emit("send",this.movieID)
+      // this.$router.push("/details");
     }
   }
 };
