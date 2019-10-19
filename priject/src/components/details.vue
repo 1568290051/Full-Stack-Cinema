@@ -75,7 +75,11 @@
               <el-tab-pane label="OK播放②">OK播放②</el-tab-pane>
             </el-tabs>
             <el-divider></el-divider>
-            <el-button type="info" plain>HD中字</el-button>
+
+            <!-- <template slot-scope="scope"> -->
+              <el-button type="info" plain @click="jump">HD中字</el-button>
+            <!-- </template> -->
+
             <el-divider></el-divider>
             <el-tabs type="border-card">
               <el-tab-pane label=" xunlei">需要安装迅雷下载工具</el-tab-pane>
@@ -126,7 +130,7 @@ export default {
         // item: "罗小黑"
       },
       // 电影详情
-      detailsData: {},
+      detailsData: [],
       // 接收电影的图片
       detailsPic: {},
       likeData: [
@@ -220,6 +224,8 @@ export default {
       activeName: "first",
       // 接收id容器
       idCont: [],
+      // 传出去的id
+      movieID: [],
       id: 1
     };
   },
@@ -258,6 +264,15 @@ export default {
       // 绑定推荐详情
       this.recomData = res.data.RelatedVideos;
       console.log(this.recomData);
+    },
+    async jump() {
+      // const { data: res } = await this.$http.get(
+      //   `/cinema/details/${id}`
+      // );
+      // 把得到的电影ID存到容器里
+      // this.movieID = res.data.video[0].video_id
+      this.movieID = this.detailsData.video_id
+      this.$router.push(`/movie/${this.movieID}`);
     }
   }
 };

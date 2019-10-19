@@ -6,6 +6,7 @@ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 Vue.use(ElementUI);
 
+
 // 连接要互传值的组件
 import Details from "./components/Details.vue";
 import ActionMovie from "./components/ActionMovie.vue";
@@ -20,6 +21,7 @@ Axios.defaults.baseURL = "http://127.0.0.1:8989/api/v1";
 
 Vue.prototype.$http = Axios;
 Vue.config.productionTip = false;
+
 
 new Vue({
   router,

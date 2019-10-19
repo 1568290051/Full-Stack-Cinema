@@ -19,9 +19,8 @@ export default new Router({
           component: () => import("./components/Home.vue")
         },
         {
-          path: "/Movie",
-          component: () =>
-            import("./components/Movie_describe/Movie_MengMianGeWang.vue")
+          path: "/movie/:id",
+          component: () => import("@/components/Movie.vue")
         },
         {
           // 电影详情路由

@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <h1 class="title">
-      <a href="/">首页</a>
+      <a href="/home">首页</a>
       》
       <a href="/">电影片</a>
       》
@@ -10,13 +10,8 @@
 
     <!-- vied -->
 
-    <embed
-      :src="videoUrl"
-      autostart="true"
-      loop="true"
-      width="1200"
-      height="600"
-    />
+    <embed :src="videoUrl" autostart="true" loop="true" width="1200" height="600" />
+
 
     <!-- video     end -->
 
@@ -24,7 +19,7 @@
       <div class="tab-title mb clearfix">
         <ul>
           <li class="err">
-            <a target="_self" href="javascript:void(0)">我要报错</a>
+
           </li>
           <li class="on">播放失败请刷新或切换播放地址</li>
         </ul>
@@ -73,7 +68,7 @@
       <a href>【电影天堂_免费电影_OK资源网】求片，提意见：请点击这里给点宝贵的意见</a>
     </div>
 
-    <div class="index-area clearfix">
+    <!-- <div class="index-area clearfix">
       <h1 class="title index-color">猜你喜欢</h1>
 
       <ul>
@@ -147,9 +142,56 @@
           </a>
         </li>
       </ul>
-    </div>
+    </div>-->
+    <!-- 猜喜欢 -->
+    <h2 style="margin-top:15px">猜你喜欢</h2>
+    <el-divider></el-divider>
+    <el-row :gutter="10" class="guessLike">
+      <el-col :span="6" v-for="item in recomData" :key="item.id">
+        <div class="grid-content bg-purple">
+          <img :src="item.cover_path" alt />
+          <span class="guessInc">
+            <p>{{item.video_name}}</p>
+            <p>{{item.to_star}}</p>
+            <p>{{item.type_sort_name}}</p>
+            <p>{{item.time_sort_name}}/{{item.region_sort_name}}</p>
+          </span>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      // 电影地址
+      videoUrl: "",
+      // 接收id容器
+      idCont: [],
+      // 电影推荐
+      recomData: [],
+    };
+  },
+  created() {
+    // 接收路由传过来的参数
+    this.idCont = this.$route.params.id;
+    this.getMovieData();
+  },
+  methods: {
+    async getMovieData() {
+      const { data: res } = await this.$http.get(
+        `/cinema/details/${this.idCont}`
+      );
+      console.log(res);
+      this.videoUrl = res.data.video[0].video_path;
+      this.recomData = res.data.RelatedVideos;
+      console.log(this.videoUrl);
+    }
+  }
+};
+</script>
 
 <style>
 .dplayer-video-wrap {
@@ -422,7 +464,7 @@ element.style {
   height: 40px;
   line-height: 40px;
   background: #eee;
-  -webkit-border-radius: 10px;
+  border-radius: 10px;
   border: 1px solid #d1d1d1;
   margin: auto auto;
 }
@@ -484,24 +526,56 @@ element {
   margin-right: 20px;
   width: 180px;
 }
+
+/* 电影推荐 */
+.guessLike .el-col {
+  margin-right: 13px;
+}
+.guessLike div {
+  position: relative;
+  overflow: hidden;
+  width: 180px;
+  border-radius: 10px;
+  height: 230px;
+}
+.guessLike div img {
+  width: 180px;
+  /* border-radius: 10px; */
+  height: 230px;
+}
+.guessInc {
+  position: absolute;
+  bottom: -175px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  cursor: pointer;
+  background: #000 url("../assets/Movie_details/p.png") no-repeat scroll center
+    80%;
+}
+.guessLike .el-col div:hover .guessInc {
+  position: absolute;
+  bottom: 0;
+  transition: all 0.5s;
+}
+.guessInc p {
+  /* font-size: 20px; */
+  margin: 0;
+  padding: 0 10px;
+  color: #bfbfde;
+  height: 30px;
+  line-height: 30px;
+}
+.guessInc p:first-child {
+  margin-top: 10px;
+  height: 40px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 17px;
+  line-height: 40px;
+}
 </style>
 
-<script>
-export default {
-  data() {
-    return {
-      videoUrl:""
-    };
-  },
-  methods: {
-    async getMovieData(id) {
-      const {data:res} = await this.$http.get(`/cinema/details/${id}`);
-      console.log(res);
-      this.videoUrl = res.data.video[0].video_path
-    }
-  },
-  created() {
-      this.getMovieData(1);
-  }
-};
-</script>
+
+
