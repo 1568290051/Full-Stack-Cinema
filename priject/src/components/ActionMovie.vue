@@ -255,9 +255,6 @@
 </template>
 
 <script>
-// 引入公共vue实例
-import bus from "../assets/eventBus.js"
-
 export default {
   data() {
     return {
