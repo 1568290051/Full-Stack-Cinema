@@ -31,13 +31,13 @@
                 <el-input
                   placeholder="输入关键字搜索"
                   v-model="search"
-                  style="width:156px;  position: fixed;
+                  style="width:156px; position: fixed;
   top: 12px;right:200px;"
                 >
                   <i slot="prefix" class="el-input__icon el-icon-search"></i>
                 </el-input>
 
-                <router-link to style="width:156px; position: fixed;
+                <router-link to="/login" style="width:156px; position: fixed;
   top: 12px;right:21px;">
                   <el-button>登录</el-button>
                 </router-link>

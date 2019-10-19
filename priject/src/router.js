@@ -16,7 +16,7 @@ export default new Router({
       children: [
         {
           path: "/home",
-          component: () => import("./components/home.vue")
+          component: () => import("./components/Home.vue")
         },
         {
           path: "/Movie",
@@ -25,8 +25,8 @@ export default new Router({
         },
         {
           // 电影详情路由
-          path: "/details",
-          component: () => import("./components/Details.vue")
+          path: "/details/:id",
+          component: () => import("@/components/Details.vue")
         },
         // 动作片
         {

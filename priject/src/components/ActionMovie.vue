@@ -256,7 +256,7 @@
 
 <script>
 // 引入公共vue实例
-import bus from "../eventBus"
+import bus from "../assets/eventBus.js"
 
 export default {
   data() {
@@ -736,10 +736,10 @@ export default {
       }
       // 把得到的电影ID存到容器里
       this.movieID = res.data.video[0].video_id
-      // console.log(this.movieID + '==========')
+      console.log(this.movieID + '==========')
       // 把容器里的数据发送到电影详情组件里
       bus.$emit("send",this.movieID)
-      // this.$router.push("/details");
+      this.$router.push(`/details/${this.movieID}`);
     }
   }
 };
