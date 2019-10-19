@@ -20,12 +20,12 @@ export default new Router({
         },
         {
           path: "/movie/:id",
-          component: () => import("@/components/Movie.vue")
+          component: () => import("./components/Movie.vue")
         },
         {
           // 电影详情路由
           path: "/details/:id",
-          component: () => import("@/components/Details.vue")
+          component: () => import("./components/Details.vue")
         },
         // 动作片
         {

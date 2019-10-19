@@ -249,7 +249,6 @@
                 <p class="letter_p">
                   <i class="letter">HD</i>
                 </p>
-              </a>
             </li>
           </ul>
         </div>
