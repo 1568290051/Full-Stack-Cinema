@@ -16,7 +16,7 @@ export default new Router({
       children: [
         {
           path: "/home",
-          component: () => import("./components/home.vue")
+          component: () => import("./components/Home.vue")
         },
         {
           path: "/Movie",
