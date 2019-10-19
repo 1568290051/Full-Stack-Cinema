@@ -31,7 +31,7 @@
                 <el-input
                   placeholder="输入关键字搜索"
                   v-model="search"
-                  style="width:156px;  position: fixed;
+                  style="width:156px; position: fixed;
   top: 12px;right:200px;"
                 >
                   <i slot="prefix" class="el-input__icon el-icon-search"></i>
