@@ -4,14 +4,14 @@
       <el-breadcrumb separator-class="el-icon-arrow-right" class="title">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>
-          <a href="Comedy">喜剧片</a>
+          <a href="eaAnimation">欧美动画</a>
         </el-breadcrumb-item>
       </el-breadcrumb>
     </h1>
     <div class="sy-all mb">
       <div class="sy-title">
         <p class="type">
-          <span class="type">喜剧片</span>
+          <span class="type">欧美动画</span>
         </p>
         <p class="chg" @click="screen">
           筛选
@@ -30,28 +30,19 @@
               <a href="#">全部</a>
             </dd>
             <dd @click="query($event)">
-              <a href="ActionMovie">动作片</a>
+              <a href="DomesticAnimation">国产动画</a>
             </dd>
             <dd @click="query($event)">
-              <a href="Comedy" class="on">喜剧片</a>
+              <a href="jkAnimation">日韩动画</a>
             </dd>
             <dd @click="query($event)">
-              <a href="love">爱情片</a>
+              <a href="eaAnimation" class="on">欧美动画</a>
             </dd>
             <dd @click="query($event)">
-              <a href="scienceFiction">科幻片</a>
+              <a href="hkAnimation">港台动画</a>
             </dd>
             <dd @click="query($event)">
-              <a href="Horror">恐怖片</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="plot">剧情片</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="Warfare">战争片</a>
-            </dd>
-            <dd @click="query($event)">
-              <a href="Record">记录片</a>
+              <a href="overseasAnimation">海外动画</a>
             </dd>
           </dl>
           <!-- 年代 -->
@@ -335,7 +326,7 @@ export default {
     // 获取电影列表
     async getMovieList() {
       const { data: res } = await this.$http.get(
-        "/selectVideo?video_sort_id=1&type_sort_id=2&time_sort_id=&region_sort_id="
+        "/selectVideo?video_sort_id=4&type_sort_id=19&time_sort_id=&region_sort_id="
       );
       console.log(res);
       // 如果没有成功，提示一下用户
@@ -405,7 +396,7 @@ export default {
       this.time2_id = '';
       if(this.area2_id == '') {
         const { data: res } = await this.$http.get(
-          "/selectVideo?video_sort_id=1&type_sort_id=2&time_sort_id=&region_sort_id="
+          "/selectVideo?video_sort_id=4&type_sort_id=19&time_sort_id=&region_sort_id="
         );
         console.log(res);
         // 如果没有成功，提示一下用户
@@ -420,7 +411,7 @@ export default {
         }
       }else if(this.area2_id !== '') {
         const { data: res } = await this.$http.get(
-          "/selectVideo?video_sort_id=1&type_sort_id=2&time_sort_id=&region_sort_id="+this.area2_id
+          "/selectVideo?video_sort_id=4&type_sort_id=19&time_sort_id=&region_sort_id="+this.area2_id
         );
         console.log(res);
         // 如果没有成功，提示一下用户
@@ -456,7 +447,7 @@ export default {
 
       if(this.area2_id == '') {
         const { data: res } = await this.$http.get(
-          "/selectVideo?video_sort_id=1&type_sort_id=2&time_sort_id="+this.time2_id+"&region_sort_id="
+          "/selectVideo?video_sort_id=4&type_sort_id=19&time_sort_id="+this.time2_id+"&region_sort_id="
         );
         console.log(res);
         // 如果没有成功，提示一下用户
@@ -471,7 +462,7 @@ export default {
         }
       }else if(this.area2_id !== '') {
         const { data: res } = await this.$http.get(
-          "/selectVideo?video_sort_id=1&type_sort_id=2&time_sort_id="+this.time2_id+"&region_sort_id="+this.area2_id
+          "/selectVideo?video_sort_id=4&type_sort_id=19&time_sort_id="+this.time2_id+"&region_sort_id="+this.area2_id
         );
         console.log(res);
         // 如果没有成功，提示一下用户
@@ -503,7 +494,7 @@ export default {
 
       if(this.time2_id == '') {
         const { data: res } = await this.$http.get(
-          "/selectVideo?video_sort_id=1&type_sort_id=2&time_sort_id=&region_sort_id="
+          "/selectVideo?video_sort_id=4&type_sort_id=19&time_sort_id=&region_sort_id="
         );
         console.log(res);
         // 如果没有成功，提示一下用户
@@ -518,7 +509,7 @@ export default {
         }
       } else if(this.time2_id !== '') {
         const { data: res } = await this.$http.get(
-          "/selectVideo?video_sort_id=1&type_sort_id=2&time_sort_id="+this.time2_id+"&region_sort_id="
+          "/selectVideo?video_sort_id=4&type_sort_id=19&time_sort_id="+this.time2_id+"&region_sort_id="
         );
         console.log(res);
         // 如果没有成功，提示一下用户
@@ -552,7 +543,7 @@ export default {
 
       if(this.time2_id == '') {
         const { data: res } = await this.$http.get(
-          "/selectVideo?video_sort_id=1&type_sort_id=2&time_sort_id="+"&region_sort_id="+this.area2_id
+          "/selectVideo?video_sort_id=4&type_sort_id=19&time_sort_id="+"&region_sort_id="+this.area2_id
         );
         console.log(res);
         // 如果没有成功，提示一下用户
@@ -567,7 +558,7 @@ export default {
         }
       } else if(this.time2_id !== '') {
         const { data: res } = await this.$http.get(
-          "/selectVideo?video_sort_id=1&type_sort_id=2&time_sort_id="+this.time2_id+"&region_sort_id="+this.area2_id
+          "/selectVideo?video_sort_id=4&type_sort_id=19&time_sort_id="+this.time2_id+"&region_sort_id="+this.area2_id
         );
         console.log(res);
         // 如果没有成功，提示一下用户
