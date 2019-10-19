@@ -5,8 +5,8 @@
         <!-- 面包屑导航 -->
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ }">{{nav.select}}</el-breadcrumb-item>
-          <el-breadcrumb-item>{{nav.item}}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ }">{{nav.typeSort_id}}</el-breadcrumb-item>
+          <el-breadcrumb-item>{{nav.video_name}}</el-breadcrumb-item>
         </el-breadcrumb>
       </el-header>
 
@@ -14,51 +14,53 @@
         <!-- 电影介绍 -->
         <el-row :gutter="20">
           <!-- 电影海报 -->
+          <!-- <template slot-scope="scope"> -->
           <el-col :span="6">
             <div class="grid-content bg-purple">
-              <img src="../assets/Movie_details/罗小黑.jpg" alt />
+              <!-- <img :src="scope.row.cover_path" alt /> -->
+              <img :src="detailsPic" alt />
             </div>
           </el-col>
-
+          <!-- </template> -->
           <!-- 电影详情 -->
           <el-col :span="16">
             <div class="grid-content bg-purple">
               <el-row :gutter="14">
                 <el-col :span="14">
-                  <div class="grid-content bg-purple details">{{details.video_name}} HD</div>
+                  <div class="grid-content bg-purple details">{{detailsData.video_name}} HD</div>
                 </el-col>
               </el-row>
               <el-row :gutter="14">
                 <el-col :span="14">
-                  <div class="grid-content bg-purple details">主演：{{details.to_star}}</div>
+                  <div class="grid-content bg-purple details">主演：{{detailsData.to_star}}</div>
                 </el-col>
               </el-row>
               <el-row :gutter="14">
                 <el-col :span="14">
-                  <div class="grid-content bg-purple details">类型：{{details.type_sort_name}}</div>
+                  <div class="grid-content bg-purple details">类型：{{detailsData.typeSort_id}}</div>
                 </el-col>
               </el-row>
               <el-row :gutter="14">
                 <el-col :span="11">
-                  <div class="grid-content bg-purple details">导演：{{details.director}}</div>
+                  <div class="grid-content bg-purple details">导演：{{detailsData.director}}</div>
                 </el-col>
                 <el-col :span="7">
-                  <div class="grid-content bg-purple details">地区：{{details.region_sort_name}}</div>
+                  <div class="grid-content bg-purple details">地区：{{detailsData.regionSort_id}}</div>
                 </el-col>
               </el-row>
               <el-row :gutter="14">
                 <el-col :span="11">
-                  <div class="grid-content bg-purple details">年份：{{details.time_sort_name}}</div>
+                  <div class="grid-content bg-purple details">年份：{{detailsData.timeSort_id}}</div>
                 </el-col>
                 <el-col :span="7">
-                  <div class="grid-content bg-purple details">语言：{{details.language_name}}</div>
+                  <div class="grid-content bg-purple details">语言：{{detailsData.language_id}}</div>
                 </el-col>
               </el-row>
               <el-row :gutter="14">
                 <el-col :span="24">
                   <div
                     class="grid-content bg-purple details"
-                  >介绍：{{details.introduction}}{{details.plot}}</div>
+                  >介绍：{{detailsData.introduction}}{{detailsData.plot}}</div>
                 </el-col>
               </el-row>
             </div>
@@ -94,9 +96,9 @@
         <h2>猜你喜欢</h2>
         <el-divider></el-divider>
         <el-row :gutter="10" class="guessLike">
-          <el-col :span="6" v-for="item in likeData" :key="item.id">
+          <el-col :span="6" v-for="item in recomData" :key="item.id">
             <div class="grid-content bg-purple">
-              <img :src="item.pic_address" alt />
+              <img :src="item.cover_path" alt />
               <span class="guessInc">
                 <p>{{item.video_name}}</p>
                 <p>{{item.to_star}}</p>
@@ -113,40 +115,20 @@
 
 <script>
 // 引入公共vue实例
-import bus from "../eventBus"
+import bus from "../assets/eventBus.js";
 
 export default {
   data() {
     return {
       // 电影导航
       nav: {
-        select: "国产动",
-        item: "罗小黑"
+        // select: "国产动",
+        // item: "罗小黑"
       },
       // 电影详情
-      details: {
-        // 电影电视剧名称
-        video_name: "罗小黑战记大电影",
-        // 主演
-        to_star: "山新 郝祥海 刘明月 ",
-        // 类型
-        type_sort_name: "国产动画",
-        // 导演
-        director: "木头 ",
-        // 地区
-        region_sort_name: "大陆",
-        // 年份
-        time_sort_name: "2019",
-        // 语言
-        language_name: "国语",
-        // 介绍
-        introduction:
-          "介绍：欢迎在线观看由山新 郝祥海 刘明月 等主演的国产动《罗小黑战记大电影》，第一时间为你提供《罗小黑战记大电影》，如果你喜欢《罗小黑战记大电影》请把它分享给的朋友，有您们的支持我们会做的更好。祝你观片愉快！",
-        // 剧情简介
-        plot:
-          "剧情简介:在熙攘的人类世界里，很多妖精隐匿其中，他们与人类相安无事地生活着。猫妖罗小黑因为家园被破坏，开始了它的流浪之旅。这场旅途中惺惺相惜的妖精同类与和谐包容的人类伙伴相继出现，让小黑陷入了两难抉择，究竟何处才是真正的归属？"
-      },
-      detailsData: [],
+      detailsData: {},
+      // 接收电影的图片
+      detailsPic: {},
       likeData: [
         {
           // 电影电视剧名称
@@ -233,6 +215,7 @@ export default {
           pic_address: require("../assets/Movie_details/天行九歌.jpg")
         }
       ],
+      recomData: [],
       // 播放列表
       activeName: "first",
       // 接收id容器
@@ -240,18 +223,41 @@ export default {
       id: 1
     };
   },
+  // mounted() {
+  //   // 获得从电影分类得到的电影ID
+  //   bus.$on("send", data => {
+  //     console.log(data + "----------");
+  //     this.idCont = data;
+  //   });
+  // },
   created() {
-    // 获得从电影分类得到的电影ID
-    bus.$on("send", data => {
-      this.idCont = data
-    })
+    // // 获得从电影分类得到的电影ID
+    // bus.$on("send", data => {
+    //   console.log(data + "----------");
+    //   this.idCont = data;
+    // });
+    // console.log(this.$route.params.id);
+    this.idCont = this.$route.params.id;
     // 获得电影详情页面数据
     this.getDetailsData();
   },
   methods: {
     async getDetailsData() {
-      const res = await this.$http.get(`/cinema/details/${this.id}`);
-      console.log(res);
+      // 获取电影详情信息
+      // console.log(this.idCont + "=============");
+      const { data: res } = await this.$http.get(
+        `/cinema/details/${this.idCont}`
+      );
+      console.log(res.data.video[0]);
+      if (res.code !== 200) return this.$message.error("获取失败");
+      // 绑定电影详情数据
+      this.nav = res.data.video[0];
+      this.detailsData = res.data.video[0];
+      this.detailsPic = this.detailsData.cover_path;
+      // console.log(this.detailsPic)
+      // 绑定推荐详情
+      this.recomData = res.data.RelatedVideos;
+      console.log(this.recomData);
     }
   }
 };

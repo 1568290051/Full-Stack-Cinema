@@ -25,8 +25,8 @@ export default new Router({
         },
         {
           // 电影详情路由
-          path: "/details",
-          component: () => import("./components/details.vue")
+          path: "/details/:id",
+          component: () => import("@/components/Details.vue")
         },
         // 动作片
         {
@@ -73,7 +73,7 @@ export default new Router({
     {
       // 注册
       path: "/register",
-      component: () => import("./views/register.vue")
+      component: () => import("./views/Register.vue")
     },
     {
       path: "/login",
