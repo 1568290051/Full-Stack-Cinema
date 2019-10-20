@@ -138,8 +138,7 @@
 </template>
 
 <script>
-// 引入公共vue实例
-import bus from "../eventBus"
+
 
 export default {
   data() {
