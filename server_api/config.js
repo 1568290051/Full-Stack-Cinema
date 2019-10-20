@@ -8,7 +8,7 @@ module.exports = {
       port: 3306,
       user: 'root',
       password: 'root',
-      database: 'priject',
+      database: 'cinema',
       charset: 'utf8mb4'
     },
     md5_key: 'jaioskdjk;lalkdlkADADa.1qwe1230-Dielkkaldadkal;d,ma,md'

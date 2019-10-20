@@ -13,6 +13,11 @@
 
  Date: 19/10/2019 12:58:38
 */
+-- 创建数据库
+-- CREATE DATABASE cinema;
+-- 使用数据库
+USE cinema;
+
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
