@@ -392,6 +392,7 @@ export default {
       console.log(id)
         const { data: res } = await this.$http.get(`/cinema/details/${id}`);
       this.video_id = res.data.Videp
+      this.$router.push(`/Details/${this.video_id}`);
     }
   },
   created() {
