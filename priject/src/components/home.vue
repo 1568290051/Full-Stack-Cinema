@@ -87,7 +87,7 @@
               <img :src="item_content.cover_path" alt />
 
               <span class="video-bg"></span>
-              <span class="lzbz">
+              <span class="lzbz-y">
                 <p
                   class="name"
                   style="font-size: 16px; font-weight: 700px;color:#ffffff;"
@@ -669,7 +669,17 @@ a{
   color: #999999;
   cursor: pointer;
 }
-
+.lzbz-y {
+  position: absolute;
+  left: 0;
+  font-size: 12px;
+  overflow: hidden;
+  bottom: -175px;
+  width: 100%;
+  height: 100%;
+  color: #999999;
+  cursor: pointer;
+}
 /* 随机推荐 start */
 .H2—1 {
   margin: 0;
