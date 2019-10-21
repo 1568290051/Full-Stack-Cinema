@@ -654,6 +654,7 @@ a{
   bottom: -196px;
 }
 .H1_P1 a:hover .lzbz,
+.H1_P1 a:hover .lzbz-y,
 .H1_P1 a:hover .video-bg {
   bottom: 0;
   transition: all 0.2s ease-in 0s;
