@@ -651,7 +651,7 @@ a{
   line-height: 24px;
   opacity: 0.7;
   cursor: pointer;
-  bottom: -170px;
+  bottom: -196px;
 }
 .H1_P1 a:hover .lzbz,
 .H1_P1 a:hover .video-bg {
@@ -663,7 +663,7 @@ a{
   left: 0;
   font-size: 12px;
   overflow: hidden;
-  bottom: -160px;
+  bottom: -205px;
   width: 100%;
   height: 100%;
   color: #999999;
@@ -717,7 +717,8 @@ a{
 /* 影片区域 样式   start 公共样式========================================================================== */
 .film——box {
   width: 100%;
-  height: 579px;
+  height: 562px;
+  overflow: hidden;
 }
 .film——box-middle {
   width: 1200px;
