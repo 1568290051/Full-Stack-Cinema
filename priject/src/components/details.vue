@@ -16,7 +16,7 @@
           <!-- 电影海报 -->
           <!-- <template slot-scope="scope"> -->
           <el-col :span="6">
-            <div class="grid-content bg-purple">
+            <div class="grid-content bg-purple poster">
               <!-- <img :src="scope.row.cover_path" alt /> -->
               <img :src="detailsPic" alt />
             </div>
@@ -268,7 +268,7 @@ export default {
       // );
       // 把得到的电影ID存到容器里
       // this.movieID = res.data.video[0].video_id
-      this.movieID = this.detailsData.video_id
+      this.movieID = this.detailsData.video_id;
       this.$router.push(`/movie/${this.movieID}`);
     }
   }
@@ -304,6 +304,14 @@ body {
 }
 .el-row {
   margin-bottom: 20px;
+}
+.poster {
+  width: 230px;
+  height: 300px;
+}
+.poster img {
+  width: 100%;
+  height: 100%;
 }
 .details {
   color: #777;
