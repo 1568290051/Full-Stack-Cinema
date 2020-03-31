@@ -260,7 +260,7 @@ export default {
     return {
       queryInfo: {
         page: 1, // 当前页
-        page_size: 5 // 每页条数
+        page_size: 12 // 每页条数
       },
       // 总条数
       total: 0,
@@ -449,7 +449,7 @@ export default {
     // 获取电影列表
     async getMovieList() {
       const { data: res } = await this.$http.get(
-        "/selectVideo?video_sort_id=1&type_sort_id=1&time_sort_id=&region_sort_id="
+        "/selectVideo?video_sort_id=1&type_sort_id=1&time_sort_id=&region_sort_id=",{params:this.queryInfo}
       );
       console.log(res);
       // 如果没有成功，提示一下用户

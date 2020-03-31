@@ -227,15 +227,18 @@
           </ul>
         </div>
         <!-- 视屏部分 -->
-        <div class="film_video">
+  <div class="film_video">
           <ul class="H1_P" style="width:1200px;height:500px;">
             <li
               class="H1_P1"
               style="width:181px;height:230px; margin-right: 18px;"
               v-for="(item,index) in Comic"
               :key="index"
-              @click="jum(item.video_id)"
-              >
+                @click="jum(item.video_id)"
+            >
+              <a >
+                <img :src="item.cover_path" alt />
+
                 <span class="video-bg"></span>
                 <span class="lzbz">
                   <p
@@ -249,7 +252,10 @@
                 <p class="letter_p">
                   <i class="letter">HD</i>
                 </p>
+              </a>
             </li>
+            <!-- 假数据 -->
+           
           </ul>
         </div>
       </div>
@@ -658,7 +664,7 @@ a{
 .H1_P1 a:hover .lzbz-y,
 .H1_P1 a:hover .video-bg {
   bottom: 0;
-  transition: all 0.2s ease-in 0s;
+  transition: all 0.25s ease-in 0s;
 }
 .lzbz {
   position: absolute;

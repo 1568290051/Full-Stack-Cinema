@@ -28,27 +28,27 @@
                     >{{item2.type_sort_name}}</el-menu-item>
                   </el-submenu>
                 </el-menu>
-                <el-input
+                <!-- <el-input
                   placeholder="输入关键字搜索"
                   v-model="search"
                   style="width:156px; position: fixed;
   top: 12px;right:200px;"
                 >
                   <i slot="prefix" class="el-input__icon el-icon-search"></i>
-                </el-input>
-
+                </el-input> -->
+<!-- 
                 <router-link to="/login" style="width:156px; position: fixed;
   top: 12px;right:21px;">
                   <el-button>登录</el-button>
                 </router-link>
-                <!-- 注册路径 to='/....' -->
-                <router-link
+      
+             <router-link
                   to="/register"
                   style="width:156px;  position: fixed;
   top: 12px;right:-55px;"
                 >
                   <el-button>注册</el-button>
-                </router-link>
+                </router-link> -->
               </div>
             </div>
           </el-col>
@@ -126,7 +126,8 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow-y: hidden
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 #app {
   width: 100%;

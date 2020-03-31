@@ -2550,7 +2550,7 @@ router.get(`/${apiName}/details/:id(\\d+)`,(req,res)=>{
 
     db.query(sql,id,(error,results)=>{
         // console.log(results[0].typeSort_id)
-        db.query('select * from video where typeSort_id =  ? and video_id !=? limit 9',[results[0].typeSort_id,id],(error,resultType)=>{
+        db.query('select * from video where typeSort_id =  ? and video_id !=? limit 6',[results[0].typeSort_id,id],(error,resultType)=>{
         // console.log(resultTime)
           for(let b=0;b<resultType.length;b++){
              data.RelatedVideos.push(resultType[b])
