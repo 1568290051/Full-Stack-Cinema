@@ -7,13 +7,13 @@
 
 #### 软件架构
 软件架构说明
-
+前台基于vue框架，后端服务器基于node.js使用了express
 
 #### 安装教程
 
-1. xxxx
-2. xxxx
-3. xxxx
+1. 创建mysql数据库cinema运行sql文件(sql文件在其它内)
+2. node index运行服务器
+3. npm run serve
 
 #### 使用说明
 
